@@ -34,7 +34,7 @@ export default function AboutPage() {
 							</p>
 						</div>
 						<Button className="mt-6" asChild>
-							<a href="/cv.pdf" download>
+							<a href="/resume.pdf" download="Resume-ANURAG_KUMAR.pdf">
 								Download CV <ArrowDownCircle className="ml-2 h-4 w-4" />
 							</a>
 						</Button>
@@ -42,8 +42,8 @@ export default function AboutPage() {
 
 					<motion.div variants={fadeIn('left', 0.3)} className="relative h-[500px]">
 						<Image
-							src="https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg"
-							alt="Professional photo"
+							src="/images/profile-pic.jpg"
+							alt="Profile photo"
 							fill
 							className="object-cover rounded-lg"
 							sizes="(max-width: 768px) 100vw, 50vw"

@@ -46,17 +46,6 @@
 		--input: 240 10% 16%;
 		--ring: 240 5% 64.9%;
 
-		--chart-1: 169 70% 40%;
-		/* teal */
-		--chart-2: 260 55% 56%;
-		/* purple */
-		--chart-3: 37 90% 64%;
-		/* amber */
-		--chart-4: 330 70% 58%;
-		/* pink */
-		--chart-5: 210 80% 64%;
-		/* blue */
-
 		--radius: 0.5rem;
 	}
 }
@@ -127,7 +116,7 @@
 
 .card-gradient::before {
 	content: '';
-	@apply absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-300;
+	@apply absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-300 pointer-events-none;
 }
 
 .card-gradient:hover::before {

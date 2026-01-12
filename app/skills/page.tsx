@@ -72,30 +72,37 @@ export default function SkillsPage() {
 					</motion.div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-						<SkillCategory
-							title="Technical Skills"
-							skills={technicalSkills}
-							icon={<Cpu className="h-6 w-6 text-primary" />}
-							delay={0.3}
-						/>
-						<SkillCategory
-							title="Software Proficiency"
-							skills={softwareSkills}
-							icon={<Code2 className="h-6 w-6 text-secondary" />}
-							delay={0.4}
-						/>
-						<SkillCategory
-							title="Soft Skills"
-							skills={softSkills}
-							icon={<Brain className="h-6 w-6 text-accent" />}
-							delay={0.5}
-						/>
-						<SkillCategory
-							title="Languages"
-							skills={languageSkills}
-							icon={<Languages className="h-6 w-6 text-primary" />}
-							delay={0.6}
-						/>
+						{/* Left Column */}
+						<div className="space-y-8">
+							<SkillCategory
+								title="Technical Skills"
+								skills={technicalSkills}
+								icon={<Cpu className="h-6 w-6 text-primary" />}
+								delay={0.2}
+							/>
+							<SkillCategory
+								title="Soft Skills"
+								skills={softSkills}
+								icon={<Brain className="h-6 w-6 text-accent" />}
+								delay={0.3}
+							/>
+							<SkillCategory
+								title="Languages"
+								skills={languageSkills}
+								icon={<Languages className="h-6 w-6 text-primary" />}
+								delay={0.4}
+							/>
+						</div>
+
+						{/* Right Column */}
+						<div className="space-y-8">
+							<SkillCategory
+								title="Software Proficiency"
+								skills={softwareSkills}
+								icon={<Code2 className="h-6 w-6 text-secondary" />}
+								delay={0.2} // Same start time as left column
+							/>
+						</div>
 					</div>
 				</motion.div>
 			</div>

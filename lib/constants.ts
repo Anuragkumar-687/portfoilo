@@ -1,95 +1,22 @@
+// Site configuration and constants
 export const siteConfig = {
 	name: 'Engineering Portfolio',
-	description:
-		'A professional portfolio website template for engineering students.',
+	description: 'A professional portfolio website template for engineering students.',
 	mainNav: [
-		{
-			title: 'Home',
-			href: '/',
-		},
-		{
-			title: 'About',
-			href: '/about',
-		},
-		{
-			title: 'Education',
-			href: '/education',
-		},
-		{
-			title: 'Skills',
-			href: '/skills',
-		},
-		{
-			title: 'Experience',
-			href: '/experience',
-		},
-		{
-			title: 'Projects',
-			href: '/projects',
-		},
-		{
-			title: 'Certificates',
-			href: '/certificates',
-		},
-		{
-			title: 'Blog',
-			href: '/blog',
-		},
-		{
-			title: 'Contact',
-			href: '/contact',
-		},
+		{ title: 'Home', href: '/' },
+		{ title: 'About', href: '/about' },
+		{ title: 'Education', href: '/education' },
+		{ title: 'Skills', href: '/skills' },
+		{ title: 'Projects', href: '/projects' },
+		{ title: 'Contact', href: '/contact' },
 	],
 	links: {
-		github: 'https://github.com/yourusername',
-		linkedin: 'https://linkedin.com/in/yourusername',
-		twitter: 'https://twitter.com/yourusername',
-		facebook: 'https://facebook.com/yourusername',
-		instagram: 'https://instagram.com/yourusername',
-		whatsapp: 'https://wa.me/yourphonenumber',
-		email: 'mailto:youremail@example.com',
-		phone: 'tel:+1234567890',
+		github: 'https://github.com/Anuragkumar-687',
+		linkedin: 'https://www.linkedin.com/in/anurag-kumar121',
+		leetcode: 'https://leetcode.com/u/Anurag_Kumar2005/',
+		email: 'mailto:anuragkumar82108@gmail.com',
 	},
 };
-
-export type Experience = {
-	title: string;
-	company: string;
-	location: string;
-	startDate: string;
-	endDate: string;
-	description: string[];
-	technologies: string[];
-};
-
-export const experiences: Experience[] = [
-	{
-		title: 'Engineering Intern',
-		company: 'Tech Company',
-		location: 'City, Country',
-		startDate: 'May 2023',
-		endDate: 'Aug 2023',
-		description: [
-			'Worked on developing and testing software components for embedded systems',
-			'Collaborated with senior engineers on project planning and execution',
-			'Implemented test procedures for quality assurance',
-		],
-		technologies: ['C++', 'Python', 'MATLAB', 'Git'],
-	},
-	{
-		title: 'Research Assistant',
-		company: 'University Lab',
-		location: 'City, Country',
-		startDate: 'Jan 2023',
-		endDate: 'Apr 2023',
-		description: [
-			'Assisted in research focusing on advanced materials for mechanical applications',
-			'Conducted literature reviews and compiled research findings',
-			'Performed data analysis and visualization of experimental results',
-		],
-		technologies: ['MATLAB', 'CAD', 'Data Analysis', 'Python'],
-	},
-];
 
 export type Project = {
 	title: string;
@@ -100,33 +27,25 @@ export type Project = {
 	repo?: string;
 };
 
+// My projects
 export const projects: Project[] = [
 	{
-		title: 'Smart Home Automation System',
+		title: 'QuickKart',
 		description:
-			'Designed and implemented a smart home automation system using IoT technologies to control lighting, temperature, and security features.',
-		image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg',
-		tags: ['IoT', 'Arduino', 'C++', 'Mobile App'],
-		link: '#',
-		repo: '#',
+			'Developed a full-stack e-commerce platform using Next.js, Express, and MongoDB with responsive design. Built an intuitive UI with product filtering, dynamic cart system, and secure user authentication.',
+		image: '/images/quickkart.png',
+		tags: ['Next.js', 'Express', 'MongoDB', 'Prisma ORM', 'RESTful APIs'],
+		link: 'https://ecommercee-webiste.vercel.app/',
+		repo: 'https://github.com/Anuragkumar-687/QuickKart',
 	},
 	{
-		title: 'Structural Analysis Software',
+		title: 'Food Website',
 		description:
-			'Developed software for structural analysis of beams and trusses using numerical methods and visualization techniques.',
-		image: 'https://images.pexels.com/photos/1036657/pexels-photo-1036657.jpeg',
-		tags: ['MATLAB', 'Python', 'FEA', 'Structural Engineering'],
-		link: '#',
-		repo: '#',
-	},
-	{
-		title: 'Renewable Energy Monitoring',
-		description:
-			'Created a system to monitor and analyze performance of solar panels and wind turbines for optimal energy production.',
-		image: 'https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg',
-		tags: ['Data Analysis', 'IoT', 'Renewable Energy', 'Visualization'],
-		link: '#',
-		repo: '#',
+			'Developed a responsive food ordering website using HTML, CSS, and JavaScript. Built an intuitive UI with smooth menu navigation and a dynamic cart system.',
+		image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
+		tags: ['HTML', 'CSS', 'JavaScript'],
+		link: 'https://portfolio-3x92.vercel.app/',
+		repo: 'https://github.com/Anuragkumar-687/Food-Website',
 	},
 ];
 
@@ -141,140 +60,75 @@ export type Education = {
 	achievements: string[];
 };
 
+// Educational background
 export const education: Education[] = [
 	{
-		degree: 'Bachelor of Science',
-		field: 'Mechanical Engineering',
-		institution: 'University Name',
-		location: 'City, Country',
-		startDate: 'Sep 2020',
-		endDate: 'Present',
-		gpa: '3.8/4.0',
-		achievements: [
-			'Dean\'s List (All Semesters)',
-			'Academic Excellence Scholarship',
-			'Senior Design Project Award',
-		],
+		degree: 'Bachelor of Technology',
+		field: 'Artificial Intelligence',
+		institution: 'Newton School Of Technology, Rishihood University',
+		location: 'Sonipat, India',
+		startDate: '2024',
+		endDate: '2028',
+		gpa: '6.85/10.0',
+		achievements: [],
 	},
 	{
-		degree: 'High School Diploma',
-		field: 'Science and Mathematics',
-		institution: 'High School Name',
-		location: 'City, Country',
-		startDate: 'Sep 2016',
-		endDate: 'Jun 2020',
-		gpa: '4.0/4.0',
-		achievements: [
-			'Valedictorian',
-			'National Mathematics Competition Finalist',
-			'Science Fair Gold Medal',
-		],
-	},
-];
-
-export type Certificate = {
-	title: string;
-	issuer: string;
-	date: string;
-	id?: string;
-	url?: string;
-	pdf?: string;
-};
-
-export const certificates: Certificate[] = [
-	{
-		title: 'Engineering Professional Certification',
-		issuer: 'Professional Engineering Association',
-		date: 'Nov 2023',
-		id: 'CERT-12345',
-		url: '#',
-		pdf: '/certificates/sample.pdf',
+		degree: 'Intermediate (Class XII)',
+		field: 'Science',
+		institution: 'Montfort Academy',
+		location: 'India',
+		startDate: '2022',
+		endDate: '2023',
+		gpa: '73.2%',
+		achievements: [],
 	},
 	{
-		title: 'CAD Design Specialist',
-		issuer: 'Autodesk',
-		date: 'Jun 2023',
-		id: 'CERT-67890',
-		url: '#',
-		pdf: '/certificates/sample.pdf',
-	},
-	{
-		title: 'Project Management Fundamentals',
-		issuer: 'Project Management Institute',
-		date: 'Mar 2023',
-		id: 'CERT-24680',
-		url: '#',
-		pdf: '/certificates/sample.pdf',
+		degree: 'Matriculation (Class X)',
+		field: 'General',
+		institution: "Saint Joseph's School",
+		location: 'India',
+		startDate: '2020',
+		endDate: '2021',
+		gpa: '85.6%',
+		achievements: [],
 	},
 ];
 
 export type Skill = {
 	name: string;
-	level: number; // 1-10
+	level: number;
 	category: 'technical' | 'software' | 'soft' | 'language';
 };
 
+// Skills organized by category
 export const skills: Skill[] = [
-	// Technical Skills
-	{ name: 'Mechanical Design', level: 9, category: 'technical' },
-	{ name: 'Structural Analysis', level: 8, category: 'technical' },
-	{ name: 'Thermodynamics', level: 7, category: 'technical' },
-	{ name: 'Control Systems', level: 8, category: 'technical' },
-	{ name: 'Circuit Design', level: 6, category: 'technical' },
+	// Programming languages
+	{ name: 'JavaScript', level: 9, category: 'technical' },
+	{ name: 'CSS', level: 9, category: 'technical' },
+	{ name: 'HTML', level: 9, category: 'technical' },
+	{ name: 'Python', level: 9, category: 'technical' },
 
-	// Software Skills
-	{ name: 'MATLAB', level: 9, category: 'software' },
-	{ name: 'AutoCAD', level: 8, category: 'software' },
-	{ name: 'SolidWorks', level: 9, category: 'software' },
-	{ name: 'Python', level: 7, category: 'software' },
-	{ name: 'C++', level: 6, category: 'software' },
-	{ name: 'ANSYS', level: 8, category: 'software' },
+	// Frameworks and tools
+	{ name: 'MongoDB', level: 8, category: 'software' },
+	{ name: 'MySQL', level: 8, category: 'software' },
+	{ name: 'Express JS', level: 8, category: 'software' },
+	{ name: 'Node.js', level: 8, category: 'software' },
+	{ name: 'React', level: 8, category: 'software' },
+	{ name: 'Next.js', level: 7, category: 'software' },
+	{ name: 'Prisma ORM', level: 8, category: 'software' },
+	{ name: 'Figma', level: 7, category: 'software' },
+	{ name: 'Pandas', level: 7, category: 'software' },
+	{ name: 'Excel', level: 8, category: 'software' },
+	{ name: 'Git', level: 8, category: 'software' },
+	{ name: 'GitHub', level: 8, category: 'software' },
 
-	// Soft Skills
-	{ name: 'Problem Solving', level: 9, category: 'soft' },
+	// Soft skills
+	{ name: 'Problem Solving', level: 7, category: 'soft' },
 	{ name: 'Team Leadership', level: 8, category: 'soft' },
-	{ name: 'Project Management', level: 7, category: 'soft' },
+	{ name: 'Project Management', level: 8, category: 'soft' },
 	{ name: 'Technical Writing', level: 8, category: 'soft' },
-	{ name: 'Presentation', level: 7, category: 'soft' },
 
 	// Languages
-	{ name: 'English', level: 10, category: 'language' },
-	{ name: 'Spanish', level: 6, category: 'language' },
-	{ name: 'French', level: 4, category: 'language' },
-];
-
-export type BlogPost = {
-	title: string;
-	excerpt: string;
-	date: string;
-	author: string;
-	image: string;
-	slug: string;
-};
-
-export const blogPosts: BlogPost[] = [
-	{
-		title: 'Advances in Renewable Energy Technologies',
-		excerpt: 'Exploring the latest innovations in renewable energy and their impact on sustainable development.',
-		date: 'Mar 15, 2024',
-		author: 'Your Name',
-		image: 'https://images.pexels.com/photos/2800832/pexels-photo-2800832.jpeg',
-		slug: 'advances-in-renewable-energy',
-	},
-	{
-		title: 'The Future of Robotics in Manufacturing',
-		excerpt: 'How robotics and automation are revolutionizing the manufacturing industry and creating new opportunities.',
-		date: 'Feb 22, 2024',
-		author: 'Your Name',
-		image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
-		slug: 'future-of-robotics-manufacturing',
-	},
-	{
-		title: 'Sustainable Building Materials in Modern Construction',
-		excerpt: 'An analysis of eco-friendly building materials and their applications in contemporary architecture.',
-		date: 'Jan 10, 2024',
-		author: 'Your Name',
-		image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg',
-		slug: 'sustainable-building-materials',
-	},
+	{ name: 'English', level: 7, category: 'language' },
+	{ name: 'Hindi', level: 9, category: 'language' },
 ];

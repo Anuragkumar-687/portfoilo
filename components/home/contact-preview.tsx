@@ -3,32 +3,34 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { SectionHeader } from '@/components/ui/section-header';
 import { fadeIn } from '@/lib/motion';
+import { siteConfig } from '@/lib/constants';
 
 export function ContactPreview() {
-	const [formState, setFormState] = useState({
+	const [formData, setFormData] = useState({
 		name: '',
 		email: '',
 		message: '',
 	});
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		setFormState({
-			...formState,
-			[e.target.name]: e.target.value,
-		});
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target;
+		setFormData(prev => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleFormSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		// Form submission would be handled here
-		alert('Form submitted! This is a demo - no actual email is sent.');
-		setFormState({ name: '', email: '', message: '' });
+
+		// Open default email client with pre-filled message
+		const emailBody = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
+		const mailtoLink = `${siteConfig.links.email}?subject=Portfolio Contact&body=${encodeURIComponent(emailBody)}`;
+
+		window.location.href = mailtoLink;
+		setFormData({ name: '', email: '', message: '' });
 	};
 
 	return (
@@ -47,36 +49,30 @@ export function ContactPreview() {
 					viewport={{ once: true }}
 					className="max-w-md mx-auto mt-10"
 				>
-					<form onSubmit={handleSubmit} className="space-y-4">
-						<div>
-							<Input
-								name="name"
-								placeholder="Your Name"
-								value={formState.name}
-								onChange={handleChange}
-								required
-							/>
-						</div>
-						<div>
-							<Input
-								name="email"
-								type="email"
-								placeholder="Your Email"
-								value={formState.email}
-								onChange={handleChange}
-								required
-							/>
-						</div>
-						<div>
-							<Textarea
-								name="message"
-								placeholder="Your Message"
-								value={formState.message}
-								onChange={handleChange}
-								required
-								className="min-h-[150px]"
-							/>
-						</div>
+					<form onSubmit={handleFormSubmit} className="space-y-4">
+						<Input
+							name="name"
+							placeholder="Your Name"
+							value={formData.name}
+							onChange={handleInputChange}
+							required
+						/>
+						<Input
+							name="email"
+							type="email"
+							placeholder="Your Email"
+							value={formData.email}
+							onChange={handleInputChange}
+							required
+						/>
+						<Textarea
+							name="message"
+							placeholder="Your Message"
+							value={formData.message}
+							onChange={handleInputChange}
+							required
+							className="min-h-[150px]"
+						/>
 						<Button type="submit" className="w-full">
 							Send Message <Send className="ml-2 h-4 w-4" />
 						</Button>

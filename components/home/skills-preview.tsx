@@ -11,28 +11,17 @@ import { skills } from '@/lib/constants';
 import { staggerContainer, fadeIn } from '@/lib/motion';
 
 export function SkillsPreview() {
-	// Filter top skills from each category (3 per category)
-	const topTechnicalSkills = skills
-		.filter(skill => skill.category === 'technical')
-		.sort((a, b) => b.level - a.level)
-		.slice(0, 3);
-
-	const topSoftwareSkills = skills
-		.filter(skill => skill.category === 'software')
-		.sort((a, b) => b.level - a.level)
-		.slice(0, 3);
-
-	const topSoftSkills = skills
-		.filter(skill => skill.category === 'soft')
-		.sort((a, b) => b.level - a.level)
-		.slice(0, 3);
+	// Combine Technical and Software skills for the main preview
+	const displaySkills = skills.filter(
+		skill => skill.category === 'technical' || skill.category === 'software'
+	);
 
 	return (
 		<section className="py-16 md:py-24">
 			<div className="container px-4">
 				<SectionHeader
-					title="Technical Skills"
-					description="Key competencies and technical expertise that I've developed throughout my engineering journey."
+					title="My Tech Stack"
+					description="A collection of the languages, tools, and frameworks I use to build scalable applications."
 				/>
 
 				<motion.div
@@ -40,97 +29,18 @@ export function SkillsPreview() {
 					initial="hidden"
 					whileInView="show"
 					viewport={{ once: true }}
-					className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10"
+					className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10"
 				>
-					<motion.div
-						variants={fadeIn('up', 0.1)}
-						className="space-y-6"
-					>
-						<Card>
-							<CardContent className="p-6">
-								<h3 className="text-xl font-bold mb-4">Technical Expertise</h3>
-								<div className="space-y-4">
-									{topTechnicalSkills.map((skill, index) => (
-										<div key={index}>
-											<div className="flex justify-between mb-1">
-												<span>{skill.name}</span>
-												<span className="text-muted-foreground">{skill.level}/10</span>
-											</div>
-											<div className="skill-bar">
-												<motion.div
-													className="skill-progress"
-													initial={{ width: 0 }}
-													whileInView={{ width: `${skill.level * 10}%` }}
-													viewport={{ once: true }}
-													transition={{ duration: 1, delay: index * 0.1 }}
-												/>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
-
-					<motion.div
-						variants={fadeIn('up', 0.2)}
-						className="space-y-6"
-					>
-						<Card>
-							<CardContent className="p-6">
-								<h3 className="text-xl font-bold mb-4">Software Proficiency</h3>
-								<div className="space-y-4">
-									{topSoftwareSkills.map((skill, index) => (
-										<div key={index}>
-											<div className="flex justify-between mb-1">
-												<span>{skill.name}</span>
-												<span className="text-muted-foreground">{skill.level}/10</span>
-											</div>
-											<div className="skill-bar">
-												<motion.div
-													className="skill-progress"
-													initial={{ width: 0 }}
-													whileInView={{ width: `${skill.level * 10}%` }}
-													viewport={{ once: true }}
-													transition={{ duration: 1, delay: index * 0.1 }}
-												/>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
-
-					<motion.div
-						variants={fadeIn('up', 0.3)}
-						className="space-y-6"
-					>
-						<Card>
-							<CardContent className="p-6">
-								<h3 className="text-xl font-bold mb-4">Soft Skills</h3>
-								<div className="space-y-4">
-									{topSoftSkills.map((skill, index) => (
-										<div key={index}>
-											<div className="flex justify-between mb-1">
-												<span>{skill.name}</span>
-												<span className="text-muted-foreground">{skill.level}/10</span>
-											</div>
-											<div className="skill-bar">
-												<motion.div
-													className="skill-progress"
-													initial={{ width: 0 }}
-													whileInView={{ width: `${skill.level * 10}%` }}
-													viewport={{ once: true }}
-													transition={{ duration: 1, delay: index * 0.1 }}
-												/>
-											</div>
-										</div>
-									))}
-								</div>
-							</CardContent>
-						</Card>
-					</motion.div>
+					{displaySkills.map((skill, index) => (
+						<motion.div
+							key={index}
+							variants={fadeIn('up', 0.1 * index)}
+							whileHover={{ scale: 1.05 }}
+							className="bg-card border rounded-lg p-4 flex flex-col items-center justify-center text-center gap-2 hover:border-primary transition-colors"
+						>
+							<span className="font-semibold text-sm md:text-base">{skill.name}</span>
+						</motion.div>
+					))}
 				</motion.div>
 
 				<div className="flex justify-center mt-10">

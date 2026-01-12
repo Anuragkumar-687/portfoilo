@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Github, ExternalLink } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { projects } from '@/lib/constants';
@@ -39,7 +39,7 @@ export default function ProjectsPage() {
 								className="flex"
 							>
 								<Card className="flex flex-col h-full card-gradient">
-									<div className="relative h-48 w-full">
+									<div className="relative aspect-video w-full">
 										<Image
 											src={project.image}
 											alt={project.title}
@@ -61,20 +61,26 @@ export default function ProjectsPage() {
 									</CardContent>
 									<CardFooter className="p-6 pt-0 gap-2">
 										{project.link && (
-											<Button size="sm" variant="outline" asChild>
-												<Link href={project.link} target="_blank" rel="noreferrer">
-													<ExternalLink className="h-4 w-4 mr-2" />
-													Demo
-												</Link>
-											</Button>
+											<a
+												href={project.link}
+												target="_blank"
+												rel="noreferrer"
+												className={buttonVariants({ variant: 'outline', size: 'sm' }) + " relative z-10"}
+											>
+												<ExternalLink className="h-4 w-4 mr-2" />
+												Demo
+											</a>
 										)}
 										{project.repo && (
-											<Button size="sm" variant="outline" asChild>
-												<Link href={project.repo} target="_blank" rel="noreferrer">
-													<Github className="h-4 w-4 mr-2" />
-													Repo
-												</Link>
-											</Button>
+											<a
+												href={project.repo}
+												target="_blank"
+												rel="noreferrer"
+												className={buttonVariants({ variant: 'outline', size: 'sm' }) + " relative z-10"}
+											>
+												<Github className="h-4 w-4 mr-2" />
+												Repo
+											</a>
 										)}
 									</CardFooter>
 								</Card>

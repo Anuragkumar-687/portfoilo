@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, FileDown } from 'lucide-react';
 import * as THREE from 'three';
-import NET from 'vanta/dist/vanta.net.min';
-
+// import NET from 'vanta/dist/vanta.net.min';
 import { Button } from '@/components/ui/button';
 import { fadeIn, staggerContainer } from '@/lib/motion';
 
@@ -16,25 +15,34 @@ export function HeroSection() {
 
 	useEffect(() => {
 		if (!vantaEffect && vantaRef.current) {
-			setVantaEffect(
-				NET({
-					el: vantaRef.current,
-					THREE: THREE,
-					mouseControls: true,
-					touchControls: true,
-					gyroControls: false,
-					minHeight: 200.00,
-					minWidth: 200.00,
-					scale: 0.8,
-					scaleMobile: 0.8,
-					color: 0xff3f81,
-					backgroundColor: 0x23153c,
-					points: 10.00,
-					maxDistance: 15.00,
-					spacing: 20.00,
-					showDots: false,
-				})
-			);
+			const loadVanta = async () => {
+				try {
+					const vanta = await import('vanta/dist/vanta.net.min');
+					const NET = vanta.default || vanta;
+					setVantaEffect(
+						NET({
+							el: vantaRef.current,
+							THREE: THREE,
+							mouseControls: true,
+							touchControls: true,
+							gyroControls: false,
+							minHeight: 200.00,
+							minWidth: 200.00,
+							scale: 0.8,
+							scaleMobile: 0.8,
+							color: 0xff3f81,
+							backgroundColor: 0x23153c,
+							points: 10.00,
+							maxDistance: 15.00,
+							spacing: 20.00,
+							showDots: false,
+						})
+					);
+				} catch (error) {
+					console.error("Failed to load Vanta effect:", error);
+				}
+			};
+			loadVanta();
 		}
 		return () => {
 			if (vantaEffect) vantaEffect.destroy();
@@ -65,7 +73,7 @@ export function HeroSection() {
 						variants={fadeIn('up', 0.3)}
 						className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight"
 					>
-						<span className="text-gradient">John Doe's</span> Portfolio
+						<span className="text-gradient">Anurag Kumar's</span> Portfolio
 					</motion.h1>
 
 					<motion.p
@@ -85,9 +93,9 @@ export function HeroSection() {
 							</Link>
 						</Button>
 						<Button size="lg" variant="outline" asChild>
-							<Link href="#" download>
+							<a href="/resume.pdf" download="Resume-ANURAG_KUMAR.pdf">
 								Download CV <FileDown className="ml-2 h-4 w-4" />
-							</Link>
+							</a>
 						</Button>
 					</motion.div>
 				</motion.div>

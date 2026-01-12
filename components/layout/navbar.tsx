@@ -112,8 +112,8 @@ export function Navbar() {
 											</Link>
 										</DropdownMenuItem>
 										<DropdownMenuItem asChild>
-											<Link href={siteConfig.links.twitter} target="_blank" rel="noreferrer">
-												Twitter
+											<Link href={siteConfig.links.leetcode} target="_blank" rel="noreferrer">
+												LeetCode
 											</Link>
 										</DropdownMenuItem>
 									</DropdownMenuContent>
