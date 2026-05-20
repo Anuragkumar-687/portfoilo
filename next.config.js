@@ -14,7 +14,9 @@ const nextConfig = {
 	eslint: {
 		ignoreDuringBuilds: true,
 	},
-	devIndicators: false,
+	devIndicators: {
+		buildActivity: false,
+	},
 	images: { unoptimized: true },
 	webpack: (config, { isServer }) => {
 		// Disable cache for both client and server builds

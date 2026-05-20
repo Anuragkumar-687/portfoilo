@@ -1,6 +1,6 @@
 // Site configuration and constants
 export const siteConfig = {
-	name: 'Engineering Portfolio',
+	name: "Anurag's Portfolio",
 	description: 'A professional portfolio website template for engineering students.',
 	mainNav: [
 		{ title: 'Home', href: '/' },
@@ -30,6 +30,15 @@ export type Project = {
 // My projects
 export const projects: Project[] = [
 	{
+		title: 'StaySync',
+		description:
+			'Engineered a scalable full-stack Smart Hostel & PG Management System with real-time workflow automation. Features JWT-based RBAC authentication, QR gate passes, Razorpay payment gateway, automated notifications, and a comprehensive analytics dashboard, digitizing operations and reducing manual work by 85%.',
+		image: '/images/staysync.png',
+		tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT & RBAC', 'Razorpay'],
+		link: 'https://stay-sync-2muq.vercel.app/',
+		repo: 'https://github.com/Anuragkumar-687/StaySync',
+	},
+	{
 		title: 'QuickKart',
 		description:
 			'Developed a full-stack e-commerce platform using Next.js, Express, and MongoDB with responsive design. Built an intuitive UI with product filtering, dynamic cart system, and secure user authentication.',
@@ -37,6 +46,15 @@ export const projects: Project[] = [
 		tags: ['Next.js', 'Express', 'MongoDB', 'Prisma ORM', 'RESTful APIs'],
 		link: 'https://ecommercee-webiste.vercel.app/',
 		repo: 'https://github.com/Anuragkumar-687/QuickKart',
+	},
+	{
+		title: 'SmartCampus',
+		description:
+			'Developed a centralized Academic Management System to streamline institutional operations including attendance tracking, course enrollment, assignments, and grading. Features a modular, scalable architecture supporting role-aware access control (RBAC) for Admin, Faculty, and Students, eliminating process fragmentation.',
+		image: '/images/smartcampus.png',
+		tags: ['Next.js', 'React', 'TypeScript', 'JWT Auth', 'RBAC', 'NeonDB'],
+		link: 'https://smartcampussystem.vercel.app/',
+		repo: 'https://github.com/Anuragkumar-687/smartcampussystem',
 	},
 	{
 		title: 'Food Website',

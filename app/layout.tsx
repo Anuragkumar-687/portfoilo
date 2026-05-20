@@ -9,7 +9,7 @@ import { Footer } from '@/components/layout/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'Engineering Portfolio',
+	title: "Anurag's Portfolio",
 	description: 'A professional portfolio website for engineering students.',
 };
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<link rel="shortcut icon" href="https://cdn-icons-png.freepik.com/256/12539/12539811.png" type="image/x-icon" />
-			<body className={inter.className}>
+			<body className={inter.className} suppressHydrationWarning>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
 					<div className="relative min-h-screen flex flex-col">
 						<Navbar />
