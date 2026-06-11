@@ -16,7 +16,7 @@ export function AboutPreview() {
 			<div className="container px-4">
 				<SectionHeader
 					title="About Me"
-					description="A passionate engineer dedicated to solving complex problems through innovative solutions."
+					description="Computer Science (AI) student with 400+ LeetCode problems solved and experience building full-stack applications using Next.js, Node.js, Express, and MongoDB."
 				/>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
@@ -54,13 +54,13 @@ export function AboutPreview() {
 							<Card className="card-gradient">
 								<CardContent className="p-4">
 									<h4 className="font-semibold">Education</h4>
-									<p className="text-sm text-muted-foreground">B.Tech – CS & AI</p>
+									<p className="text-sm text-muted-foreground">B.Tech – Computer Science & Artificial Intelligence</p>
 								</CardContent>
 							</Card>
 							<Card className="card-gradient">
 								<CardContent className="p-4">
 									<h4 className="font-semibold">Year</h4>
-									<p className="text-sm text-muted-foreground">Undergraduate • 2nd Year</p>
+									<p className="text-sm text-muted-foreground">Undergraduate • 3rd Year</p>
 								</CardContent>
 							</Card>
 							<Card className="card-gradient">
