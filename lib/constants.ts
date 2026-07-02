@@ -79,7 +79,7 @@ export const projects: Project[] = [
       'RESTful APIs',
     ],
     impact: 'Full-featured production e-commerce platform',
-    link: 'https://ecommercee-webiste.vercel.app/',
+    link: 'https://quick-kart-black.vercel.app',
     repo: 'https://github.com/Anuragkumar-687/QuickKart',
     featured: true,
   },
@@ -199,7 +199,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'databases',
     label: 'Databases',
     icon: '◈',
-    skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Supabase'],
+    skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Supabase', 'Firebase'],
     color: 'purple',
   },
   {
