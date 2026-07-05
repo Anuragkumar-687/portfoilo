@@ -136,7 +136,7 @@ export const education: Education[] = [
     location: 'Sonipat, India',
     startDate: '2024',
     endDate: '2028',
-    gpa: '7.0',
+    gpa: '8.5',
     description:
       'Pursuing B.Tech in AI with focus on full-stack development, data structures, algorithms, and machine learning. Active member of the coding club with consistent coding practice.',
   },
@@ -148,7 +148,7 @@ export const education: Education[] = [
     location: 'India',
     startDate: '2022',
     endDate: '2023',
-    gpa: '73.2%',
+    gpa: '85.2%',
     description: 'Completed higher secondary education in science stream.',
   },
   {
@@ -159,7 +159,7 @@ export const education: Education[] = [
     location: 'India',
     startDate: '2020',
     endDate: '2021',
-    gpa: '85.6%',
+    gpa: '89.6%',
     description: 'Completed secondary education with strong academic performance.',
   },
 ];
