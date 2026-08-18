@@ -1,30 +1,50 @@
 import type { Config } from 'tailwindcss';
 
+/**
+ * Tailwind is mapped onto the CSS custom properties defined in app/globals.css
+ * so there is exactly one place to change a colour or a spacing step.
+ * Guidebook §4: one colour system, one 8-point spacing scale.
+ */
 const config: Config = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        sans: ['var(--font-inter)', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        mono: ['var(--font-mono)', 'Fira Code', 'ui-monospace', 'monospace'],
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-cyan-purple': 'linear-gradient(135deg, #14B8A6, #8B5CF6)',
-        'gradient-cyan': 'linear-gradient(135deg, #14B8A6, #67E8F9)',
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
+
+      // ── Colour system (5 semantic roles) ──────────────────────────────
       colors: {
+        bg: {
+          DEFAULT: 'var(--bg)',
+          surface: 'var(--bg-surface)',
+          elevated: 'var(--bg-elevated)',
+        },
+        ink: {
+          DEFAULT: 'var(--text)',
+          secondary: 'var(--text-secondary)',
+          muted: 'var(--text-muted)',
+        },
+        brand: {
+          DEFAULT: 'var(--primary)',
+          soft: 'var(--primary-soft)',
+          line: 'var(--primary-line)',
+        },
+        accent2: {
+          DEFAULT: 'var(--secondary)',
+          soft: 'var(--secondary-soft)',
+        },
+        hairline: {
+          DEFAULT: 'var(--line)',
+          strong: 'var(--line-strong)',
+        },
+
+        // shadcn/Radix primitives
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -36,20 +56,16 @@ const config: Config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'var(--primary)',
+          foreground: '#04211d',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'var(--secondary)',
+          foreground: '#ffffff',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -58,58 +74,65 @@ const config: Config = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        cyan: {
-          DEFAULT: '#14B8A6',
-          light: '#67E8F9',
-          dark: '#0d9488',
-        },
-        purple: {
-          DEFAULT: '#8B5CF6',
-          light: '#a78bfa',
-          dark: '#7c3aed',
-        },
       },
+
+      // ── 8-point spacing scale ─────────────────────────────────────────
+      spacing: {
+        s1: 'var(--space-1)', //   8px
+        s2: 'var(--space-2)', //  16px
+        s3: 'var(--space-3)', //  24px
+        s4: 'var(--space-4)', //  32px
+        s5: 'var(--space-5)', //  48px
+        s6: 'var(--space-6)', //  64px
+        s7: 'var(--space-7)', //  96px
+        s8: 'var(--space-8)', // 128px
+      },
+
+      // ── Fluid type scale ──────────────────────────────────────────────
+      fontSize: {
+        xs: 'var(--text-xs)',
+        sm: 'var(--text-sm)',
+        base: 'var(--text-base)',
+        lg: 'var(--text-lg)',
+        xl: 'var(--text-xl)',
+        '2xl': 'var(--text-2xl)',
+        '3xl': 'var(--text-3xl)',
+        '4xl': 'var(--text-4xl)',
+        '5xl': 'var(--text-5xl)',
+      },
+
+      borderRadius: {
+        DEFAULT: 'var(--radius)',
+        lg: 'var(--radius-lg)',
+        xl: 'var(--radius-xl)',
+      },
+
+      maxWidth: {
+        page: 'var(--container)',
+      },
+
+      transitionTimingFunction: {
+        ease: 'var(--ease)',
+      },
+
       keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
+        rise: {
+          from: { opacity: '0', transform: 'translateY(12px)' },
+          to: { opacity: '1', transform: 'none' },
         },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-12px)' },
-        },
-        'float-delayed': {
-          '0%, 100%': { transform: 'translateY(-6px)' },
-          '50%': { transform: 'translateY(6px)' },
-        },
-        'glow-pulse': {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(20, 184, 166, 0.2)' },
-          '50%': { boxShadow: '0 0 40px rgba(20, 184, 166, 0.4), 0 0 80px rgba(20, 184, 166, 0.15)' },
-        },
-        shimmer: {
-          '0%': { backgroundPosition: '-200% center' },
-          '100%': { backgroundPosition: '200% center' },
-        },
-        'spin-slow': {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
+        fade: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
         },
       },
+
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        float: 'float 4s ease-in-out infinite',
-        'float-delayed': 'float-delayed 5s ease-in-out infinite',
-        'glow-pulse': 'glow-pulse 3s ease-in-out infinite',
-        shimmer: 'shimmer 3s linear infinite',
-        'spin-slow': 'spin-slow 8s linear infinite',
+        rise: 'rise var(--dur-slow) var(--ease) both',
+        fade: 'fade var(--dur-slow) var(--ease) both',
       },
     },
   },
   plugins: [require('tailwindcss-animate')],
 };
+
 export default config;

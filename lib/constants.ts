@@ -1,44 +1,131 @@
-// ─── Site Configuration ───────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// Single source of truth for every piece of content on the site.
+// All facts here are taken from the resume — keep them in sync.
+// Copy rule (Guidebook §5): write outcomes, not tools.
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Canonical origin. Used by metadata, sitemap, robots and JSON-LD.
+ * Change this one line when the custom domain is live.
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://anuragkumar-portfolio.vercel.app';
+
 export const siteConfig = {
   name: 'Anurag Kumar',
-  title: 'Full Stack Developer & AI Undergraduate',
-  tagline: 'Building scalable web applications and solving complex problems.',
-  description:
-    'Computer Science (AI) student with strong problem-solving skills and experience building full-stack applications using Next.js, Node.js, Express.js, and MongoDB.',
+  role: 'Software Developer',
+  discipline: 'Backend & Full Stack Engineering',
+
+  /** The one-line promise. Outcome first, stack second. */
+  headline: 'I build backend systems that survive production.',
+
+  /** Supporting sentence — what a visitor gets by working with him. */
+  subheadline:
+    'Software developer specialising in backend engineering, distributed systems and REST APIs. I ship production-ready platforms, and I contribute to the open-source infrastructure other teams depend on.',
+
+  /** Short version used in metadata and cards. */
+  summary:
+    'Software Developer with hands-on experience building scalable, production-ready applications and contributing to open-source software. Backend engineering, distributed systems, REST API development and full-stack delivery.',
+
+  location: 'Sonipat, Haryana, India',
+  availability: 'Open to full-time SDE roles and internships, remote or on-site',
+
   mainNav: [
     { title: 'Home', href: '#home' },
-    { title: 'About', href: '#about' },
-    { title: 'Education', href: '#education' },
+    { title: 'Experience', href: '#experience' },
+    { title: 'Work', href: '#work' },
+    { title: 'Open Source', href: '#open-source' },
     { title: 'Skills', href: '#skills' },
-    { title: 'Projects', href: '#projects' },
-    { title: 'Achievements', href: '#achievements' },
+    { title: 'About', href: '#about' },
     { title: 'Contact', href: '#contact' },
   ],
+
   links: {
     github: 'https://github.com/Anuragkumar-687',
     linkedin: 'https://www.linkedin.com/in/anurag-kumar121',
     leetcode: 'https://leetcode.com/u/Anurag_Kumar2005/',
     email: 'mailto:anuragkumar82108@gmail.com',
+    emailAddress: 'anuragkumar82108@gmail.com',
+    phone: 'tel:+918210816017',
+    phoneNumber: '+91 82108 16017',
+    resume: '/resume.pdf',
   },
+} as const;
+
+// ─── Proof strip ──────────────────────────────────────────────────────────────
+// The four numbers a recruiter should register in the first five seconds.
+export const proofStats = [
+  { value: '2', label: 'Engineering internships', detail: 'Backend & full stack' },
+  { value: '430+', label: 'DSA problems solved', detail: '1558 contest rating' },
+  { value: '2', label: 'Open-source projects', detail: 'Merged PRs upstream' },
+  { value: '85%', label: 'Manual effort removed', detail: 'StaySync automation' },
+] as const;
+
+// ─── Experience ───────────────────────────────────────────────────────────────
+export type Experience = {
+  id: string;
+  role: string;
+  company: string;
+  companyNote?: string;
+  location: string;
+  period: string;
+  /** Lead with what changed, not what was touched. */
+  summary: string;
+  highlights: string[];
+  stack: string[];
 };
 
-// ─── Hero Stats ───────────────────────────────────────────────────────────────
-export const heroStats = [
-  { value: '400+', label: 'LeetCode Problems' },
-  { value: '1558', label: 'Contest Rating' },
-  { value: '2', label: 'Production Projects' },
-  { value: '1', label: 'Hackathon Win' },
+export const experience: Experience[] = [
+  {
+    id: 'privatevault',
+    role: 'Backend Developer Intern',
+    company: 'PrivateVault AI',
+    location: 'Remote',
+    period: 'May 2026 to July 2026',
+    summary:
+      'Built and maintained backend services behind the product, from feature design through to code review and performance tuning.',
+    highlights: [
+      'Developed and maintained backend services using Python, SQL and FastAPI.',
+      'Worked with the engineering team to design, implement and test new application features.',
+      'Debugged production issues, optimised application performance and reviewed teammates’ code.',
+      'Integrated REST APIs, databases and third-party services under clean-code and documentation standards.',
+    ],
+    stack: ['Python', 'FastAPI', 'SQL', 'REST APIs'],
+  },
+  {
+    id: 'bizowl',
+    role: 'Full Stack Developer Intern',
+    company: 'Bizowl',
+    companyNote: 'WhiteSense Pvt. Ltd.',
+    location: 'Remote, Delhi',
+    period: 'April 2026 to June 2026',
+    summary:
+      'Owned features end to end across the company’s web products, from the first commit to the deployed release.',
+    highlights: [
+      'Delivered full-stack features with React, Node.js, Express.js, MongoDB, SQL and Firebase, from development through deployment.',
+      'Designed and integrated RESTful APIs and optimised backend services.',
+      'Implemented Firebase for real-time data sync and authentication.',
+      'Collaborated via Git/GitHub, contributing to code reviews, debugging and release best practice.',
+    ],
+    stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Firebase', 'SQL'],
+  },
 ];
 
 // ─── Projects ─────────────────────────────────────────────────────────────────
 export type Project = {
   title: string;
   subtitle: string;
-  description: string;
-  image: string;
+  period?: string;
+  /** The problem the project exists to solve. */
+  problem: string;
+  /** What was actually engineered. */
+  build: string;
+  /** Measurable result. */
+  impact: string;
+  /** Headline numbers for the card. */
+  metrics: { value: string; label: string }[];
+  image?: string;
   tags: string[];
-  features: string[];
-  impact?: string;
   link?: string;
   repo?: string;
   featured?: boolean;
@@ -47,120 +134,93 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: 'StaySync',
-    subtitle: 'Smart Hostel Management System',
-    description:
-      'Engineered a scalable full-stack Smart Hostel & PG Management System with real-time workflow automation. Features JWT-based RBAC authentication, QR gate passes, Razorpay payment gateway, automated notifications, and a comprehensive analytics dashboard.',
-    image: '/images/staysync.png',
-    tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT & RBAC', 'Razorpay'],
-    features: [
-      'JWT Authentication & RBAC',
-      'QR Gate Pass System',
-      'Razorpay Payment Integration',
-      'Analytics Dashboard',
-      'Automated Notifications',
+    subtitle: 'Role-based hostel management platform',
+    period: 'December 2025',
+    problem:
+      'Room allocation, complaints, gate passes, payments and attendance were all handled by hand, across paper registers and spreadsheets. There was no audit trail, and no way for an administrator to see what was happening.',
+    build:
+      'Engineered a role-based platform with 10+ core modules serving students, administrators and security staff. Built on Next.js, Node.js, Express.js and MongoDB with JWT-based RBAC authentication, Redis caching, Razorpay payments, automated notifications and REST APIs.',
+    impact:
+      'Digitised hostel workflows and cut manual administrative effort by 85%, while adding secure access control and a modular backend the institution can extend.',
+    metrics: [
+      { value: '85%', label: 'Less manual effort' },
+      { value: '10+', label: 'Core modules' },
+      { value: '3', label: 'User roles' },
     ],
-    impact: 'Reduced manual hostel operations by 85%',
+    image: '/images/staysync.webp',
+    tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'JWT + RBAC', 'Razorpay'],
     link: 'https://stay-sync-2muq.vercel.app/',
     repo: 'https://github.com/Anuragkumar-687/StaySync',
     featured: true,
   },
   {
-    title: 'QuickKart',
-    subtitle: 'Full Stack E-Commerce Platform',
-    description:
-      'Developed a full-stack e-commerce platform using Next.js, Express, and MongoDB with responsive design. Built an intuitive UI with product filtering, dynamic cart system, and secure user authentication.',
-    image: '/images/quickkart.png',
-    tags: ['Next.js', 'Express', 'MongoDB', 'Prisma ORM', 'REST APIs'],
-    features: [
-      'Secure Authentication',
-      'Product Management',
-      'Order Management',
-      'Admin Dashboard',
-      'RESTful APIs',
+    title: 'QuickKart AI',
+    subtitle: 'Region-aware intelligent commerce platform',
+    period: 'November 2025',
+    problem:
+      'Generic storefronts show every shopper the same catalogue. What is actually selling near you, right now, never reaches the page, and cataloguing products by hand does not scale.',
+    build:
+      'Built an AI-powered commerce platform that ingests 200+ products from 2 external APIs through automated ETL pipelines, exposed via 15+ production REST APIs with JWT auth, RBAC, server-side pagination, filtering, search, reviews, wishlist and secure checkout. A region-aware recommendation engine reads 4+ behavioural signals to drive 5+ personalisation modules: Trending Near You, Popular in Your Region, Recommended for You, Recently Viewed and Frequently Bought Together.',
+    impact:
+      'An event-driven analytics pipeline with Redis caching, optimised MongoDB indexing and asynchronous event processing keeps API performance and product ranking stable under high traffic.',
+    metrics: [
+      { value: '15+', label: 'Production REST APIs' },
+      { value: '200+', label: 'Products via ETL' },
+      { value: '5+', label: 'Personalisation modules' },
     ],
-    impact: 'Full-featured production e-commerce platform',
+    image: '/images/quickkart.webp',
+    tags: ['Next.js', 'Node.js', 'MongoDB', 'Redis', 'ETL', 'Recommendation Engine', 'JWT + RBAC'],
     link: 'https://quick-kart-black.vercel.app',
     repo: 'https://github.com/Anuragkumar-687/QuickKart',
     featured: true,
   },
   {
     title: 'SmartCampus',
-    subtitle: 'Academic Management System',
-    description:
-      'Centralized platform streamlining institutional operations including attendance, course enrollment, assignments, and grading with RBAC for Admin, Faculty, and Students.',
-    image: '/images/smartcampus.png',
-    tags: ['Next.js', 'TypeScript', 'JWT Auth', 'RBAC', 'NeonDB'],
-    features: [
-      'Attendance Tracking',
-      'Course Enrollment',
-      'Role-based Access',
-      'Grading System',
+    subtitle: 'Academic management system',
+    problem:
+      'Attendance, enrolment, assignments and grading lived in disconnected tools with no single view for faculty or students.',
+    build:
+      'A centralised platform with role-based access for admins, faculty and students, covering attendance tracking, course enrolment and grading.',
+    impact: 'One system of record for institutional academic operations.',
+    metrics: [
+      { value: '3', label: 'Roles' },
+      { value: '4', label: 'Core modules' },
     ],
+    image: '/images/smartcampus.webp',
+    tags: ['Next.js', 'TypeScript', 'NeonDB', 'JWT Auth', 'RBAC'],
     link: 'https://smartcampussystem.vercel.app/',
     repo: 'https://github.com/Anuragkumar-687/smartcampussystem',
     featured: false,
   },
-  {
-    title: 'Food Website',
-    subtitle: 'Responsive Food Ordering UI',
-    description:
-      'Responsive food ordering website with smooth menu navigation and a dynamic cart system.',
-    image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg',
-    tags: ['HTML', 'CSS', 'JavaScript'],
-    features: ['Dynamic Cart', 'Menu Navigation', 'Responsive Layout'],
-    link: 'https://portfolio-3x92.vercel.app/',
-    repo: 'https://github.com/Anuragkumar-687/Food-Website',
-    featured: false,
-  },
 ];
 
-// ─── Education ────────────────────────────────────────────────────────────────
-export type Education = {
-  degree: string;
-  field: string;
-  institution: string;
-  shortInstitution: string;
-  location: string;
-  startDate: string;
-  endDate: string;
-  gpa?: string;
+// ─── Open source ──────────────────────────────────────────────────────────────
+export type OpenSourceProject = {
+  name: string;
   description: string;
+  contribution: string;
+  areas: string[];
+  href: string;
 };
 
-export const education: Education[] = [
+export const openSource: OpenSourceProject[] = [
   {
-    degree: 'Bachelor of Technology',
-    field: 'Artificial Intelligence',
-    institution: 'Newton School of Technology, Rishihood University',
-    shortInstitution: 'Newton School of Technology',
-    location: 'Sonipat, India',
-    startDate: '2024',
-    endDate: '2028',
-    gpa: '8.5',
+    name: 'Apicurio Registry',
     description:
-      'Pursuing B.Tech in AI with focus on full-stack development, data structures, algorithms, and machine learning. Active member of the coding club with consistent coding practice.',
+      'A datastore for standard event schemas and API designs, used to decouple structure from content in event-driven architectures.',
+    contribution:
+      'Merged and ongoing pull requests across backend infrastructure and event sourcing.',
+    areas: ['Distributed Systems', 'Event Sourcing', 'Backend Infrastructure'],
+    href: 'https://github.com/Apicurio/apicurio-registry',
   },
   {
-    degree: 'Intermediate (Class XII)',
-    field: 'Science',
-    institution: 'Montfort Academy',
-    shortInstitution: 'Montfort Academy',
-    location: 'India',
-    startDate: '2022',
-    endDate: '2023',
-    gpa: '85.2%',
-    description: 'Completed higher secondary education in science stream.',
-  },
-  {
-    degree: 'Matriculation (Class X)',
-    field: 'General',
-    institution: "Saint Joseph's School",
-    shortInstitution: "Saint Joseph's School",
-    location: 'India',
-    startDate: '2020',
-    endDate: '2021',
-    gpa: '89.6%',
-    description: 'Completed secondary education with strong academic performance.',
+    name: 'OpenEverest',
+    description:
+      'Cloud-native infrastructure tooling for running and operating production database workloads on Kubernetes.',
+    contribution:
+      'Contributions spanning Kubernetes manifests, cloud-native tooling and backend services.',
+    areas: ['Kubernetes', 'Cloud Native', 'Helm'],
+    href: 'https://github.com/percona/everest',
   },
 ];
 
@@ -168,153 +228,192 @@ export const education: Education[] = [
 export type SkillCategory = {
   id: string;
   label: string;
-  icon: string;
+  /** Why this cluster matters — keeps the section from being a word cloud. */
+  note: string;
   skills: string[];
-  color: 'cyan' | 'purple' | 'white';
 };
 
 export const skillCategories: SkillCategory[] = [
   {
-    id: 'programming',
-    label: 'Programming',
-    icon: '{ }',
-    skills: ['JavaScript', 'TypeScript', 'Python', 'Java'],
-    color: 'cyan',
+    id: 'languages',
+    label: 'Languages',
+    note: 'Typed and untyped, systems and scripting.',
+    skills: ['JavaScript', 'TypeScript', 'Python', 'Java', 'Go', 'HTML', 'CSS'],
+  },
+  {
+    id: 'backend',
+    label: 'Backend & APIs',
+    note: 'Where most of my work happens.',
+    skills: [
+      'Node.js',
+      'Express.js',
+      'FastAPI',
+      'Django',
+      'REST APIs',
+      'Postman',
+      'Distributed Systems',
+    ],
   },
   {
     id: 'frontend',
     label: 'Frontend',
-    icon: '⬡',
-    skills: ['React', 'Next.js', 'HTML', 'CSS', 'Tailwind CSS'],
-    color: 'purple',
+    note: 'Interfaces that ship with the backend.',
+    skills: ['React', 'Next.js', 'Tailwind CSS', 'React Native'],
   },
   {
-    id: 'backend',
-    label: 'Backend',
-    icon: '⚡',
-    skills: ['Node.js', 'Express.js', 'REST APIs'],
-    color: 'cyan',
+    id: 'data',
+    label: 'Databases & Data',
+    note: 'Relational, document and managed.',
+    skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Supabase', 'Firebase', 'Prisma ORM'],
   },
   {
-    id: 'databases',
-    label: 'Databases',
-    icon: '◈',
-    skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Supabase', 'Firebase'],
-    color: 'purple',
-  },
-  {
-    id: 'tools',
-    label: 'Tools & DevOps',
-    icon: '⚙',
-    skills: ['Git', 'GitHub', 'Docker', 'Prisma ORM'],
-    color: 'cyan',
+    id: 'cloud',
+    label: 'Cloud & DevOps',
+    note: 'Getting it running, and keeping it running.',
+    skills: ['Docker', 'Kubernetes', 'Helm', 'Kafka', 'Linux', 'Git & GitHub'],
   },
   {
     id: 'ai',
     label: 'AI & ML',
-    icon: '◈',
-    skills: ['Generative AI', 'Hugging Face', 'RAG'],
-    color: 'purple',
+    note: 'Applied, not academic.',
+    skills: [
+      'Generative AI',
+      'RAG',
+      'LangChain',
+      'LangGraph',
+      'Hugging Face',
+      'Keras',
+      'Scikit-learn',
+      'NumPy',
+      'Pandas',
+      'SciPy',
+    ],
   },
 ];
 
 // ─── Achievements ─────────────────────────────────────────────────────────────
 export type Achievement = {
   id: string;
-  icon: string;
   title: string;
   metric?: string;
   description: string;
-  color: 'cyan' | 'purple';
+  href?: string;
 };
 
 export const achievements: Achievement[] = [
   {
-    id: 'leetcode-problems',
-    icon: '⚡',
-    title: '400+ LeetCode Problems Solved',
-    metric: '400+',
+    id: 'leetcode',
+    title: 'LeetCode: 430+ problems, 1558 rating',
+    metric: '430+',
     description:
-      'Solved 400+ DSA problems covering arrays, trees, graphs, dynamic programming, greedy algorithms, and advanced interview topics.',
-    color: 'cyan',
+      'Solved 430+ problems and reached a contest rating of 1558, sharpening algorithmic problem-solving, optimisation and debugging.',
+    href: 'https://leetcode.com/u/Anurag_Kumar2005/',
   },
   {
-    id: 'contest-rating',
-    icon: '🏆',
-    title: 'LeetCode Contest Rating 1558',
-    metric: '1558',
+    id: 'open-source',
+    title: 'Open Source Contributor',
+    metric: '2 projects',
     description:
-      'Achieved a contest rating of 1558 and ranked within the top 30% of participants globally.',
-    color: 'purple',
+      'Merged and ongoing pull requests to Apicurio Registry and OpenEverest, covering distributed systems, event sourcing, backend infrastructure, Kubernetes and cloud-native development.',
+    href: 'https://github.com/Anuragkumar-687',
   },
   {
-    id: 'hackathon',
-    icon: '🥇',
-    title: 'Hack The Hunt Winner',
-    metric: '1st',
+    id: 'flipkart-grid',
+    title: 'Flipkart GRiD 8.0 semifinalist',
+    metric: 'Semifinal',
     description:
-      'Won a coding-based treasure hunt competition involving GitHub workflows, terminal commands, debugging, and problem solving.',
-    color: 'cyan',
+      "Advanced to the semifinal round of Flipkart's national Software Development Engineering challenge.",
   },
   {
-    id: 'projects',
-    icon: '🚀',
-    title: 'Production-Level Full Stack Projects',
-    metric: '2+',
+    id: 'hack-the-hunt',
+    title: 'Hack the Hunt winner',
+    metric: '1st place',
     description:
-      'Built StaySync and QuickKart with authentication, APIs, database integration, and scalable architecture.',
-    color: 'purple',
-  },
-  {
-    id: 'streak',
-    icon: '🔥',
-    title: '100 Days Coding Badge',
-    metric: '100+',
-    description:
-      'Maintained long-term consistency in coding and problem solving with a 100-day streak badge.',
-    color: 'cyan',
-  },
-  {
-    id: 'club',
-    icon: '👥',
-    title: 'Active Coding Club Member',
-    description:
-      'Participate in coding contests, peer learning sessions, and technical discussions at the college coding club.',
-    color: 'purple',
+      'Won a coding-based technical treasure hunt built around Git, Linux, debugging and problem-solving challenges.',
   },
 ];
 
-export const achievementStats = [
-  { value: '400+', label: 'Problems Solved' },
-  { value: '1558', label: 'Contest Rating' },
-  { value: '2', label: 'Major Projects' },
-  { value: '1', label: 'Hackathon Win' },
-];
-
-// Legacy skills export for backwards compatibility
-export type Skill = {
-  name: string;
-  level: number;
-  category: 'technical' | 'software' | 'soft' | 'language';
+// ─── Education ────────────────────────────────────────────────────────────────
+export type Education = {
+  degree: string;
+  field?: string;
+  institution: string;
+  location?: string;
+  period: string;
+  grade: string;
 };
 
-export const skills: Skill[] = [
-  { name: 'JavaScript', level: 9, category: 'technical' },
-  { name: 'TypeScript', level: 8, category: 'technical' },
-  { name: 'Python', level: 8, category: 'technical' },
-  { name: 'Java', level: 7, category: 'technical' },
-  { name: 'React', level: 9, category: 'software' },
-  { name: 'Next.js', level: 9, category: 'software' },
-  { name: 'Node.js', level: 8, category: 'software' },
-  { name: 'Express.js', level: 8, category: 'software' },
-  { name: 'MongoDB', level: 8, category: 'software' },
-  { name: 'MySQL', level: 8, category: 'software' },
-  { name: 'PostgreSQL', level: 7, category: 'software' },
-  { name: 'Prisma ORM', level: 8, category: 'software' },
-  { name: 'Git', level: 9, category: 'software' },
-  { name: 'GitHub', level: 9, category: 'software' },
-  { name: 'Problem Solving', level: 8, category: 'soft' },
-  { name: 'Team Collaboration', level: 9, category: 'soft' },
-  { name: 'English', level: 8, category: 'language' },
-  { name: 'Hindi', level: 10, category: 'language' },
+export const education: Education[] = [
+  {
+    degree: 'Bachelor of Technology',
+    field: 'Artificial Intelligence',
+    institution: 'Newton School of Technology, Rishihood University',
+    location: 'Sonipat, India',
+    period: '2024 to 2028',
+    grade: '7.0 / 10.0',
+  },
+  {
+    degree: 'Intermediate (Class XII)',
+    institution: 'Montfort Academy',
+    period: '2022 to 2023',
+    grade: '73.2%',
+  },
+  {
+    degree: 'Matriculation (Class X)',
+    institution: "Saint Joseph's School",
+    period: '2020 to 2021',
+    grade: '85.6%',
+  },
+];
+
+// ─── What I can be hired for ──────────────────────────────────────────────────
+// Guidebook §2: a portfolio is a sales page. State the offer plainly.
+export type Service = {
+  title: string;
+  description: string;
+  deliverables: string[];
+};
+
+export const services: Service[] = [
+  {
+    title: 'Backend & API engineering',
+    description:
+      'Production REST APIs with authentication, role-based access, caching and the indexing work that keeps them fast under load.',
+    deliverables: ['REST API design', 'Auth & RBAC', 'Redis caching', 'Database modelling'],
+  },
+  {
+    title: 'Full-stack product build',
+    description:
+      'An entire product from schema to screen, the kind of multi-role platform that StaySync and QuickKart AI are.',
+    deliverables: ['Next.js + Node.js', 'Payments & notifications', 'Admin dashboards', 'Deployment'],
+  },
+  {
+    title: 'Data pipelines & integrations',
+    description:
+      'Automated ETL from third-party APIs, event-driven processing and the analytics layer that makes the data useful.',
+    deliverables: ['ETL pipelines', 'Third-party integrations', 'Event processing', 'Recommendations'],
+  },
+];
+
+// ─── Positioning quote ────────────────────────────────────────────────────────
+// The reference site gives a client testimonial this slot. Without real client
+// quotes to show, the honest equivalent is a plain statement of how I work —
+// nothing here is attributed to anyone else.
+export const positioningQuote = {
+  text: 'Anything can be made to work once. The engineering is in what happens on the thousandth request, on the payment that fails halfway, and on the one user who should never have had access.',
+  attribution: 'How I think about building',
+};
+
+// ─── Toolchain ────────────────────────────────────────────────────────────────
+// Shown as a single row, the way the reference site shows its tools.
+// `code` is the badge label — slicing the name gives nonsense ("Ty", "No"),
+// so the abbreviations are written out.
+export const toolchain: { name: string; code: string }[] = [
+  { name: 'TypeScript', code: 'TS' },
+  { name: 'Python', code: 'PY' },
+  { name: 'Go', code: 'GO' },
+  { name: 'Node.js', code: 'JS' },
+  { name: 'Kubernetes', code: 'K8' },
+  { name: 'PostgreSQL', code: 'PG' },
+  { name: 'Docker', code: 'DK' },
 ];

@@ -1,231 +1,146 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Github, Linkedin, Mail } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { siteConfig } from '@/lib/constants';
 
+const sectionIds = siteConfig.mainNav.map((item) => item.href.slice(1));
+
+/** Compact set for the pill — a floating bar cannot carry seven links legibly. */
+const primaryLinks = siteConfig.mainNav.filter((item) =>
+  ['#work', '#experience', '#open-source', '#about'].includes(item.href)
+);
+
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [active, setActive] = useState('home');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Detect active section
-      const sections = siteConfig.mainNav.map((n) => n.href.replace('#', ''));
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
-            setActiveSection(section);
-            break;
-          }
-        }
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24);
+      let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 160) current = id;
       }
+      setActive(current);
     };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false);
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
   return (
     <>
-      <motion.header
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-[#050505]/90 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl shadow-black/30'
-            : 'bg-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <motion.button
-              onClick={() => handleNavClick('#home')}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative group flex items-center gap-2"
+      <a href="#work" className="skip-link">
+        Skip to content
+      </a>
+
+      {/* Floating, centred pill rather than a full-width bar — it keeps the
+          page edge-to-edge and lets the bands behind it read as full chapters. */}
+      <header className="fixed inset-x-0 top-s2 z-50 flex justify-center px-s3">
+        <div className="nav-shell" data-scrolled={scrolled}>
+          <a href="#home" className="flex shrink-0 items-center gap-2 pl-1 pr-2">
+            <span
+              className="flex h-7 w-7 items-center justify-center rounded-full text-[11px] font-bold text-white"
+              style={{ background: 'var(--primary)' }}
             >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#14B8A6] to-[#8B5CF6] flex items-center justify-center text-white font-bold text-sm">
-                AK
-              </div>
-              <span className="font-semibold text-white/90 text-sm tracking-tight hidden sm:block">
-                Anurag Kumar
-              </span>
-            </motion.button>
+              AK
+            </span>
+            <span className="text-sm font-semibold">Anurag</span>
+          </a>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-1">
-              {siteConfig.mainNav.map((item) => {
-                const sectionId = item.href.replace('#', '');
-                const isActive = activeSection === sectionId;
-                return (
-                  <button
-                    key={item.href}
-                    onClick={() => handleNavClick(item.href)}
-                    className={`nav-link-item px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? 'text-[#14B8A6] bg-[#14B8A6]/8'
-                        : 'text-white/50 hover:text-white/90 hover:bg-white/[0.04]'
-                    }`}
-                  >
-                    {item.title}
-                  </button>
-                );
-              })}
-            </nav>
+          <nav className="hidden items-center gap-0.5 md:flex" aria-label="Primary">
+            {primaryLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="nav-link"
+                data-active={active === item.href.slice(1)}
+              >
+                {item.title}
+              </a>
+            ))}
+          </nav>
 
-            {/* Desktop right actions */}
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg text-white/50 hover:text-white/90 hover:bg-white/[0.06] transition-all duration-200"
-                aria-label="GitHub"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="p-2 rounded-lg text-white/50 hover:text-white/90 hover:bg-white/[0.06] transition-all duration-200"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a
-                href="/resume.pdf"
-                download="Resume-Anurag-Kumar.pdf"
-                className="btn-primary !py-2 !px-4 !text-xs"
-              >
-                Resume
-              </a>
-            </div>
+          <a href="#contact" className="btn btn-primary !h-9 !px-4 !text-xs">
+            Contact
+          </a>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="md:hidden p-2 rounded-lg text-white/70 hover:text-white hover:bg-white/[0.06] transition-all"
-              aria-label="Toggle menu"
-            >
-              {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setMenuOpen(true)}
+            className="btn btn-ghost !h-9 !w-9 !px-0 md:!hidden"
+            aria-label="Open menu"
+            aria-expanded={menuOpen}
+          >
+            <Menu className="h-[18px] w-[18px]" />
+          </button>
         </div>
-      </motion.header>
+      </header>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {mobileOpen && (
+        {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-[60] md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 md:hidden"
           >
             <div
-              className="absolute inset-0 bg-black/80 backdrop-blur-xl"
-              onClick={() => setMobileOpen(false)}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              onClick={() => setMenuOpen(false)}
             />
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute right-0 top-0 bottom-0 w-72 bg-[#0a0a0a] border-l border-white/[0.06] p-6 flex flex-col"
+            <motion.nav
+              aria-label="Mobile"
+              className="absolute inset-x-s2 top-s2 flex flex-col rounded-xl border border-[var(--line-strong)] bg-[var(--bg-surface)] p-s2"
+              initial={{ opacity: 0, y: -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
             >
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#14B8A6] to-[#8B5CF6] flex items-center justify-center text-white font-bold text-sm">
-                    AK
-                  </div>
-                  <span className="font-semibold text-white/90 text-sm">Anurag Kumar</span>
-                </div>
+              <div className="mb-s1 flex items-center justify-between pl-s1">
+                <span className="text-sm font-semibold">Menu</span>
                 <button
-                  onClick={() => setMobileOpen(false)}
-                  className="p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/[0.06]"
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  className="btn btn-ghost !h-9 !w-9 !px-0"
+                  aria-label="Close menu"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="h-4 w-4" />
                 </button>
               </div>
 
-              <nav className="flex flex-col gap-1 flex-1">
-                {siteConfig.mainNav.map((item, i) => {
-                  const sectionId = item.href.replace('#', '');
-                  const isActive = activeSection === sectionId;
-                  return (
-                    <motion.button
-                      key={item.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.04 }}
-                      onClick={() => handleNavClick(item.href)}
-                      className={`text-left px-4 py-3 rounded-lg text-sm font-medium transition-all ${
-                        isActive
-                          ? 'text-[#14B8A6] bg-[#14B8A6]/8 border border-[#14B8A6]/20'
-                          : 'text-white/60 hover:text-white/90 hover:bg-white/[0.04]'
-                      }`}
-                    >
-                      {item.title}
-                    </motion.button>
-                  );
-                })}
-              </nav>
+              {siteConfig.mainNav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center justify-between rounded-lg px-s2 py-s2 text-sm text-[var(--text-secondary)] transition-colors hover:bg-white/[0.05] hover:text-[var(--text)]"
+                >
+                  {item.title}
+                  <ArrowUpRight className="h-3.5 w-3.5 opacity-40" />
+                </a>
+              ))}
 
-              <div className="flex items-center gap-3 pt-6 border-t border-white/[0.06]">
-                <a
-                  href={siteConfig.links.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2.5 rounded-lg text-white/50 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] transition-all"
-                  aria-label="GitHub"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-                <a
-                  href={siteConfig.links.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2.5 rounded-lg text-white/50 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] transition-all"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href={siteConfig.links.email}
-                  className="p-2.5 rounded-lg text-white/50 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] transition-all"
-                  aria-label="Email"
-                >
-                  <Mail className="w-4 h-4" />
-                </a>
-                <a
-                  href="/resume.pdf"
-                  download="Resume-Anurag-Kumar.pdf"
-                  className="flex-1 btn-primary !py-2.5 !px-4 !text-xs justify-center"
-                >
-                  Download CV
-                </a>
-              </div>
-            </motion.div>
+              <a
+                href={siteConfig.links.resume}
+                download="Anurag-Kumar-Resume.pdf"
+                className="btn btn-primary mt-s2 w-full"
+              >
+                Download résumé
+              </a>
+            </motion.nav>
           </motion.div>
         )}
       </AnimatePresence>

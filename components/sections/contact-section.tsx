@@ -1,261 +1,157 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Mail, Linkedin, Github, Code2, Send, MapPin } from 'lucide-react';
+import { useState } from 'react';
+import { Mail, Linkedin, Github, Code2, Send, Phone, ArrowUpRight } from 'lucide-react';
+import { Reveal } from '@/components/ui/reveal';
+import { SectionHeading } from '@/components/ui/section-heading';
 import { siteConfig } from '@/lib/constants';
 
-const contactLinks = [
+const channels = [
   {
     icon: Mail,
     label: 'Email',
-    value: 'anuragkumar82108@gmail.com',
+    value: siteConfig.links.emailAddress,
     href: siteConfig.links.email,
-    color: '#14B8A6',
-    description: 'Drop me a message',
+  },
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: siteConfig.links.phoneNumber,
+    href: siteConfig.links.phone,
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     value: 'anurag-kumar121',
     href: siteConfig.links.linkedin,
-    color: '#0A66C2',
-    description: 'Connect professionally',
   },
   {
     icon: Github,
     label: 'GitHub',
     value: 'Anuragkumar-687',
     href: siteConfig.links.github,
-    color: '#fff',
-    description: 'Check out my code',
   },
   {
     icon: Code2,
     label: 'LeetCode',
     value: 'Anurag_Kumar2005',
     href: siteConfig.links.leetcode,
-    color: '#FFA116',
-    description: 'View DSA profile',
   },
 ];
 
 export function ContactSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
 
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [sending, setSending] = useState(false);
-
+  /**
+   * The site is a static export, so there is no server to post to. Rather than
+   * fake a submission, the form composes a pre-filled email in the visitor's
+   * own client — honest about where the message actually goes.
+   */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
-    const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-    window.location.href = `${siteConfig.links.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(body)}`;
-    setTimeout(() => {
-      setSending(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 1000);
+    const subject = `Portfolio enquiry from ${form.name || 'a visitor'}`;
+    const body = `${form.message}\n\nFrom ${form.name}\n${form.email}`;
+    window.location.href = `${siteConfig.links.email}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
   };
 
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className="relative py-24 md:py-32 overflow-hidden"
-      style={{ background: '#050505' }}
-    >
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,184,166,0.04) 0%, transparent 70%)',
-        }}
-      />
-      <div className="absolute inset-0 grid-bg opacity-20" />
+    <section id="contact" className="section">
+      <div className="container-page">
+        <SectionHeading
+          eyebrow="Contact"
+          title="Have something that needs building?"
+          lead={siteConfig.availability}
+        />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="mb-4"
-        >
-          <span className="section-label">Contact</span>
-        </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.05 }}
-          className="section-heading mb-5"
-        >
-          Let's Build Something{' '}
-          <span className="text-gradient-cyan">Amazing Together</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-white/40 text-base mb-16 max-w-lg"
-        >
-          Open to software engineering internships, full-stack development opportunities, and
-          collaborations. Let's connect!
-        </motion.p>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left: Contact links */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-4"
-          >
-            {contactLinks.map((link, i) => {
-              const Icon = link.icon;
-              const isEmail = link.href.startsWith('mailto');
-              return (
-                <motion.a
-                  key={link.label}
-                  href={link.href}
-                  target={isEmail ? undefined : '_blank'}
-                  rel="noreferrer"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.2 + i * 0.07 }}
-                  className="flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 group"
-                  style={{
-                    background: 'rgba(255,255,255,0.025)',
-                    borderColor: 'rgba(255,255,255,0.06)',
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = `${link.color}08`;
-                    el.style.borderColor = `${link.color}30`;
-                    el.style.transform = 'translateX(4px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLElement;
-                    el.style.background = 'rgba(255,255,255,0.025)';
-                    el.style.borderColor = 'rgba(255,255,255,0.06)';
-                    el.style.transform = 'translateX(0)';
-                  }}
-                >
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: `${link.color}12`,
-                      border: `1px solid ${link.color}25`,
-                    }}
+        <div className="grid gap-s4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-s5">
+          {/* ── Direct channels ───────────────────────────────────────── */}
+          <Reveal>
+            <div className="flex flex-col gap-1">
+              {channels.map(({ icon: Icon, label, value, href }) => {
+                const external = href.startsWith('http');
+                return (
+                  <a
+                    key={label}
+                    href={href}
+                    target={external ? '_blank' : undefined}
+                    rel={external ? 'noreferrer' : undefined}
+                    className="group flex items-center gap-s2 rounded-lg border border-transparent px-s2 py-s2 transition-colors hover:border-[var(--line)] hover:bg-[var(--bg-surface)]"
                   >
-                    <Icon className="w-4 h-4" style={{ color: link.color }} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-white/80 font-semibold text-sm">{link.label}</p>
-                    <p className="text-white/35 text-xs truncate font-mono">{link.value}</p>
-                  </div>
-                  <span className="text-white/20 text-xs group-hover:text-white/40 transition-colors">
-                    {link.description} →
-                  </span>
-                </motion.a>
-              );
-            })}
-
-            {/* Location */}
-            <div
-              className="flex items-center gap-3 px-4 py-3 rounded-xl border mt-4"
-              style={{ background: 'rgba(255,255,255,0.015)', borderColor: 'rgba(255,255,255,0.04)' }}
-            >
-              <MapPin className="w-4 h-4 text-white/30 flex-shrink-0" />
-              <p className="text-white/30 text-xs">Sonipat, Haryana, India — Open to Remote</p>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[var(--line)] bg-[var(--bg-surface)]">
+                      <Icon className="h-4 w-4 text-[var(--text-secondary)] transition-colors group-hover:text-[var(--primary)]" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-xs text-[var(--text-muted)]">{label}</span>
+                      <span className="mono block break-all text-sm text-[var(--text)]">
+                        {value}
+                      </span>
+                    </span>
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-[var(--text-muted)] opacity-0 transition-opacity group-hover:opacity-100" />
+                  </a>
+                );
+              })}
             </div>
-          </motion.div>
+          </Reveal>
 
-          {/* Right: Contact form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4 p-7 rounded-2xl border"
-              style={{
-                background: 'rgba(255,255,255,0.025)',
-                borderColor: 'rgba(255,255,255,0.06)',
-              }}
-            >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* ── Message form ──────────────────────────────────────────── */}
+          <Reveal>
+            <form onSubmit={handleSubmit} className="card p-s3 md:p-s4">
+              <div className="grid gap-s2 sm:grid-cols-2">
                 <div>
-                  <label className="text-white/40 text-xs font-medium block mb-1.5">Name</label>
+                  <label htmlFor="contact-name" className="field-label">
+                    Name
+                  </label>
                   <input
-                    type="text"
+                    id="contact-name"
+                    className="field"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
                     placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                    required
-                    className="input-premium"
                   />
                 </div>
                 <div>
-                  <label className="text-white/40 text-xs font-medium block mb-1.5">Email</label>
+                  <label htmlFor="contact-email" className="field-label">
+                    Email
+                  </label>
                   <input
+                    id="contact-email"
                     type="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                    className="field"
                     required
-                    className="input-premium"
+                    value={form.email}
+                    onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+                    placeholder="you@company.com"
                   />
                 </div>
               </div>
 
-              <div>
-                <label className="text-white/40 text-xs font-medium block mb-1.5">Subject</label>
-                <input
-                  type="text"
-                  placeholder="What's this about?"
-                  value={formData.subject}
-                  onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))}
-                  required
-                  className="input-premium"
-                />
-              </div>
-
-              <div>
-                <label className="text-white/40 text-xs font-medium block mb-1.5">Message</label>
+              <div className="mt-s2">
+                <label htmlFor="contact-message" className="field-label">
+                  What do you need built?
+                </label>
                 <textarea
-                  placeholder="Tell me about your project or opportunity..."
-                  value={formData.message}
-                  onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
+                  id="contact-message"
+                  className="field resize-none"
                   required
-                  rows={5}
-                  className="input-premium resize-none"
+                  rows={6}
+                  value={form.message}
+                  onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
+                  placeholder="A short brief, a role description, or just a question."
                 />
               </div>
 
-              <button
-                type="submit"
-                disabled={sending}
-                className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {sending ? (
-                  <span className="flex items-center gap-2">
-                    <motion.span
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                      className="block w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-                    />
-                    Sending...
-                  </span>
-                ) : (
-                  <>
-                    <Send className="w-4 h-4" /> Send Message
-                  </>
-                )}
+              <button type="submit" className="btn btn-primary mt-s3 w-full">
+                <Send className="h-4 w-4" /> Send message
               </button>
+
+              <p className="mt-s2 text-center text-xs text-[var(--text-muted)]">
+                Opens in your email client. Nothing is stored on this site.
+              </p>
             </form>
-          </motion.div>
+          </Reveal>
         </div>
       </div>
     </section>
