@@ -12,9 +12,9 @@ export function ServicesSection() {
     <section id="services" className="section">
       <div className="container-page">
         <SectionHeading
-          eyebrow="How I can help"
-          title="What you can hand me"
-          lead="Whether you are hiring for a team or need a system built, these are the pieces of work I take end to end."
+          eyebrow="Work with me"
+          title="What you can hand over"
+          lead="Three things clients hand me most often. Each one I take from the first conversation to something running in production."
         />
 
         <div className="grid gap-s3 md:grid-cols-3">

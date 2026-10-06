@@ -61,7 +61,7 @@ export function ContactSection() {
       <div className="container-page">
         <SectionHeading
           eyebrow="Contact"
-          title="Have something that needs building?"
+          title="Tell me what you need built"
           lead={siteConfig.availability}
         />
 
@@ -130,7 +130,7 @@ export function ContactSection() {
 
               <div className="mt-s2">
                 <label htmlFor="contact-message" className="field-label">
-                  What do you need built?
+                  Your project
                 </label>
                 <textarea
                   id="contact-message"
@@ -139,7 +139,7 @@ export function ContactSection() {
                   rows={6}
                   value={form.message}
                   onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
-                  placeholder="A short brief, a role description, or just a question."
+                  placeholder="What are you building, and what is in the way? A couple of lines is plenty to start."
                 />
               </div>
 

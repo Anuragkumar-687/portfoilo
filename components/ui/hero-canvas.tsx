@@ -20,6 +20,11 @@ export function HeroCanvas() {
     if (!host) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Skip WebGL on phones. At 375px the particle field is barely perceptible,
+    // and a continuously rendering canvas is a real battery and GPU cost on a
+    // device a client is likely holding while deciding whether to contact you.
+    if (window.matchMedia('(max-width: 767px)').matches) return;
+
     let disposed = false;
     let cleanup: (() => void) | undefined;
 

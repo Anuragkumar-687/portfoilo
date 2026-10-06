@@ -13,22 +13,22 @@ export const siteUrl =
 
 export const siteConfig = {
   name: 'Anurag Kumar',
-  role: 'Software Developer',
-  discipline: 'Backend & Full Stack Engineering',
+  role: 'Full Stack Developer & AI Engineer',
+  discipline: 'Full-stack products, payments and applied AI',
 
   /** The one-line promise. Outcome first, stack second. */
-  headline: 'I build backend systems that survive production.',
+  headline: 'I build full-stack products, and the AI that runs inside them.',
 
   /** Supporting sentence — what a visitor gets by working with him. */
   subheadline:
-    'Software developer specialising in backend engineering, distributed systems and REST APIs. I ship production-ready platforms, and I contribute to the open-source infrastructure other teams depend on.',
+    'Full-stack developer and AI engineer. I build the software businesses run on, front to back, and the AI features inside it. Most recently for a startup serving 10,000 people a day.',
 
   /** Short version used in metadata and cards. */
   summary:
-    'Software Developer with hands-on experience building scalable, production-ready applications and contributing to open-source software. Backend engineering, distributed systems, REST API development and full-stack delivery.',
+    'Full Stack Developer and AI Engineer with hands-on experience building scalable, production-ready applications and contributing to open-source software. Full-stack delivery, payment systems, applied AI and distributed systems.',
 
   location: 'Sonipat, Haryana, India',
-  availability: 'Open to full-time SDE roles and internships, remote or on-site',
+  availability: 'Taking on freelance projects now, and open to full-time roles. Remote or on-site.',
 
   mainNav: [
     { title: 'Home', href: '#home' },
@@ -117,80 +117,158 @@ export type Project = {
   subtitle: string;
   period?: string;
   /** The problem the project exists to solve. */
-  problem: string;
+  problem?: string;
   /** What was actually engineered. */
-  build: string;
+  build?: string;
   /** Measurable result. */
-  impact: string;
+  impact?: string;
+  /** Exactly what this person did. Kept to three lines so cards stay level. */
+  contributions: string[];
   /** Headline numbers for the card. */
   metrics: { value: string; label: string }[];
   image?: string;
   tags: string[];
   link?: string;
   repo?: string;
+  /** Marks commissioned work, so a visitor can tell it from a side project. */
+  context?: string;
+  /** Cards sharing a group render under one heading. */
+  group?: string;
+  /** For products that ship across several public surfaces. */
+  links?: { label: string; href: string }[];
   featured?: boolean;
 };
 
 export const projects: Project[] = [
+  // ── Bizowl ────────────────────────────────────────────────────────────────
+  // Split into its four surfaces rather than one entry: each was a distinct
+  // build, and a prospective client scanning the grid should see the breadth.
+  {
+    title: 'Bizowl Platform',
+    group: 'bizowl',
+    subtitle: 'The platform 10,000+ founders use daily',
+    period: '2026',
+    context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
+    contributions: [
+      'Shipped the entire platform, from first commit to production.',
+      'Owned the business logic and API layer behind every page, not just the UI.',
+      'Carries 10,000+ users a day on the architecture I built.',
+    ],
+    metrics: [
+      { value: '10,000+', label: 'Daily users' },
+      { value: '3,000+', label: 'Startups helped' },
+      { value: '500+', label: 'Providers listed' },
+    ],
+    image: '/images/bizowl-site.webp',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB', 'SQL', 'Firebase', 'REST APIs'],
+    links: [{ label: 'Visit the site', href: 'https://www.bizzowl.com/' }],
+    featured: true,
+  },
+  {
+    title: 'Startup Directory',
+    group: 'bizowl',
+    subtitle: 'Puts member startups in front of investors',
+    period: '2026',
+    context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
+    contributions: [
+      'Designed and built the whole directory: data model, search and filtering.',
+      'Built the investor view that surfaces startups by sector, stage and funding need.',
+      'Replaced a manual listing process with a product founders can self-serve.',
+    ],
+    metrics: [
+      { value: '3,000+', label: 'Founders reached' },
+      { value: '120+', label: 'Mentors listed' },
+      { value: '500+', label: 'Providers indexed' },
+    ],
+    image: '/images/bizowl-directory.webp',
+    tags: ['React', 'Node.js', 'MongoDB', 'Search & filters', 'REST APIs'],
+    links: [{ label: 'Open the directory', href: 'https://www.bizzowl.com/startup-directory' }],
+    featured: true,
+  },
+  {
+    title: 'Founder Membership',
+    group: 'bizowl',
+    subtitle: 'Revenue product, live and taking payments',
+    period: '2026',
+    context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
+    contributions: [
+      'Built the revenue engine: the paid membership that converts free users.',
+      'Integrated Razorpay end to end, so real money moves through code I wrote.',
+      'Sold out 20+ founding memberships on day one of launch.',
+    ],
+    metrics: [
+      { value: '20+', label: 'Paid on launch day' },
+      { value: '2', label: 'Pricing tiers' },
+      { value: '50', label: 'Founding seats' },
+    ],
+    image: '/images/bizowl-membership.webp',
+    tags: ['React', 'Node.js', 'Razorpay', 'MongoDB', 'Payments'],
+    links: [{ label: 'See the membership', href: 'https://www.bizzowl.com/founder-membership' }],
+    featured: true,
+  },
+  {
+    title: 'Client Portal',
+    group: 'bizowl',
+    subtitle: 'The logged-in product 1,000+ members rely on',
+    period: '2026',
+    context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
+    contributions: [
+      'Built the logged-in product that members use to run projects day to day.',
+      'Shipped 12+ modules: projects, payments, enquiries, meetings and tickets.',
+      'Role-aware access, so every member sees exactly what they are entitled to.',
+    ],
+    metrics: [
+      { value: '1,000+', label: 'Member accounts' },
+      { value: '12+', label: 'Portal modules' },
+    ],
+    image: '/images/bizowl-portal.webp',
+    tags: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Firebase Auth', 'RBAC'],
+    links: [{ label: 'Bizowl (login required)', href: 'https://www.bizzowl.com/' }],
+    featured: true,
+  },
+
+  // ── Personal builds ───────────────────────────────────────────────────────
   {
     title: 'StaySync',
+    group: 'personal',
     subtitle: 'Role-based hostel management platform',
     period: 'December 2025',
-    problem:
-      'Room allocation, complaints, gate passes, payments and attendance were all handled by hand, across paper registers and spreadsheets. There was no audit trail, and no way for an administrator to see what was happening.',
-    build:
-      'Engineered a role-based platform with 10+ core modules serving students, administrators and security staff. Built on Next.js, Node.js, Express.js and MongoDB with JWT-based RBAC authentication, Redis caching, Razorpay payments, automated notifications and REST APIs.',
-    impact:
-      'Digitised hostel workflows and cut manual administrative effort by 85%, while adding secure access control and a modular backend the institution can extend.',
+    contributions: [
+      'Cut manual administrative work by 85% by digitising paper workflows.',
+      'Engineered 10+ modules with JWT-based RBAC, Redis caching and payments.',
+      'Built it to be handed over, with a modular backend the institution can extend.',
+    ],
     metrics: [
       { value: '85%', label: 'Less manual effort' },
       { value: '10+', label: 'Core modules' },
       { value: '3', label: 'User roles' },
     ],
     image: '/images/staysync.webp',
-    tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'JWT + RBAC', 'Razorpay'],
+    tags: ['Next.js', 'Node.js', 'Express.js', 'MongoDB', 'Redis', 'JWT + RBAC'],
     link: 'https://stay-sync-2muq.vercel.app/',
     repo: 'https://github.com/Anuragkumar-687/StaySync',
     featured: true,
   },
   {
     title: 'QuickKart AI',
+    group: 'personal',
     subtitle: 'Region-aware intelligent commerce platform',
     period: 'November 2025',
-    problem:
-      'Generic storefronts show every shopper the same catalogue. What is actually selling near you, right now, never reaches the page, and cataloguing products by hand does not scale.',
-    build:
-      'Built an AI-powered commerce platform that ingests 200+ products from 2 external APIs through automated ETL pipelines, exposed via 15+ production REST APIs with JWT auth, RBAC, server-side pagination, filtering, search, reviews, wishlist and secure checkout. A region-aware recommendation engine reads 4+ behavioural signals to drive 5+ personalisation modules: Trending Near You, Popular in Your Region, Recommended for You, Recently Viewed and Frequently Bought Together.',
-    impact:
-      'An event-driven analytics pipeline with Redis caching, optimised MongoDB indexing and asynchronous event processing keeps API performance and product ranking stable under high traffic.',
+    contributions: [
+      'Built 15+ production REST APIs with auth, RBAC, pagination and search.',
+      'Wrote a recommendation engine that personalises the catalogue by region.',
+      'Kept it fast under load with Redis caching and tuned MongoDB indexing.',
+    ],
     metrics: [
       { value: '15+', label: 'Production REST APIs' },
       { value: '200+', label: 'Products via ETL' },
       { value: '5+', label: 'Personalisation modules' },
     ],
     image: '/images/quickkart.webp',
-    tags: ['Next.js', 'Node.js', 'MongoDB', 'Redis', 'ETL', 'Recommendation Engine', 'JWT + RBAC'],
+    tags: ['Next.js', 'Node.js', 'MongoDB', 'Redis', 'ETL', 'Recommendations'],
     link: 'https://quick-kart-black.vercel.app',
     repo: 'https://github.com/Anuragkumar-687/QuickKart',
     featured: true,
-  },
-  {
-    title: 'SmartCampus',
-    subtitle: 'Academic management system',
-    problem:
-      'Attendance, enrolment, assignments and grading lived in disconnected tools with no single view for faculty or students.',
-    build:
-      'A centralised platform with role-based access for admins, faculty and students, covering attendance tracking, course enrolment and grading.',
-    impact: 'One system of record for institutional academic operations.',
-    metrics: [
-      { value: '3', label: 'Roles' },
-      { value: '4', label: 'Core modules' },
-    ],
-    image: '/images/smartcampus.webp',
-    tags: ['Next.js', 'TypeScript', 'NeonDB', 'JWT Auth', 'RBAC'],
-    link: 'https://smartcampussystem.vercel.app/',
-    repo: 'https://github.com/Anuragkumar-687/smartcampussystem',
-    featured: false,
   },
 ];
 
@@ -376,22 +454,22 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: 'Backend & API engineering',
+    title: 'A full-stack product, built and shipped',
     description:
-      'Production REST APIs with authentication, role-based access, caching and the indexing work that keeps them fast under load.',
-    deliverables: ['REST API design', 'Auth & RBAC', 'Redis caching', 'Database modelling'],
+      'You describe the business, I deliver the working software: database, APIs, interface and deployment. The way I built Bizowl and StaySync.',
+    deliverables: ['Full product build', 'Database & API design', 'Admin dashboards', 'Deployed and handed over'],
   },
   {
-    title: 'Full-stack product build',
+    title: 'Payments that actually collect',
     description:
-      'An entire product from schema to screen, the kind of multi-role platform that StaySync and QuickKart AI are.',
-    deliverables: ['Next.js + Node.js', 'Payments & notifications', 'Admin dashboards', 'Deployment'],
+      'Checkout, subscriptions and memberships wired end to end, with the verification and access logic behind them. Real money has moved through the integrations I have shipped.',
+    deliverables: ['Razorpay integration', 'Subscriptions & tiers', 'Entitlement logic', 'Invoices & receipts'],
   },
   {
-    title: 'Data pipelines & integrations',
+    title: 'AI features that earn their place',
     description:
-      'Automated ETL from third-party APIs, event-driven processing and the analytics layer that makes the data useful.',
-    deliverables: ['ETL pipelines', 'Third-party integrations', 'Event processing', 'Recommendations'],
+      'Recommendations, retrieval and assistants wired into the product properly, not bolted on. I built the region-aware engine behind QuickKart AI and study AI at degree level.',
+    deliverables: ['RAG & document Q&A', 'Recommendation engines', 'LLM integration', 'LangChain & LangGraph'],
   },
 ];
 

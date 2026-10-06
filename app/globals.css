@@ -25,7 +25,7 @@
   /* Text family */
   --text: #ededed;
   --text-secondary: #a3a3a3;
-  --text-muted: #737373;
+  --text-muted: #8a8a8a;   /* 4.9:1 on --bg; #737373 measured 3.76:1, under AA */
 
   /* Primary — the single dominant accent. Used for action + emphasis only,
      so it keeps its force. */
@@ -451,17 +451,11 @@
   min-width: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: rise linear both;
-      animation-timeline: view();
-      /* A range name cannot appear inside calc(), so the cascade comes from
-         each element's own scroll position rather than a per-item offset. */
-      animation-range: entry 5% entry 65%;
-    }
-  }
-}
+/* The CSS scroll-timeline reveal that used to live here is superseded by GSAP
+   ScrollTrigger in components/ui/motion-layer.tsx, which can stagger siblings
+   rather than firing every element at the same scroll position. `.reveal`
+   stays visible by default, so a failed bundle still renders a complete page;
+   the motion layer sets its own initial state in JS. */
 
 .animate-rise { animation: rise var(--dur-slow) var(--ease) both; }
 .animate-fade { animation: fade var(--dur-slow) var(--ease) both; }
@@ -736,4 +730,79 @@
   border-color: var(--line-strong);
   background: rgba(255, 255, 255, 0.06);
   color: var(--text);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOBILE
+   Audited at 375px. The page measured 22 screens tall with 27 tap targets
+   under 40px, so this section trims decoration and enforces thumb-sized
+   controls rather than restyling anything.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* 1. Thumb targets. Apple HIG asks for 44px; the compact `!h-9` buttons were
+        36px, which is a mis-tap on a real phone. Height only, so the visual
+        weight of the compact variant is kept. */
+  .btn {
+    min-height: 44px;
+  }
+
+  /* Icon-only buttons were 44x36 and 44x40: tall enough, too narrow. A thumb
+     needs both axes. */
+  .btn[class*='!w-'],
+  .btn[aria-label] {
+    min-width: 44px;
+  }
+
+  /* Text links in the footer were 17px tall, which is a coin-flip to tap.
+     Block-level plus padding gives each one a full-width row, so a thumb
+     landing anywhere on the line hits it. */
+  footer .link-underline {
+    display: block;
+    padding-block: 12px;
+    /* The underline animation is painted from the background, so it has to be
+       re-anchored to the text width rather than the full row. */
+    background-size: 0% 1px;
+    width: fit-content;
+    min-width: 44px;
+  }
+
+  /* The header wordmark was a 28px target. */
+  header a[href='#home'] {
+    min-height: 44px;
+  }
+
+  /* 2. Decoration that costs height and earns nothing on a small screen. */
+  .marquee,
+  .grid-texture {
+    display: none;
+  }
+
+  /* 3. Tighter vertical rhythm. At 48px the gaps read as generous on desktop
+        and as dead space on a phone. */
+  .section {
+    padding-block: var(--space-4);
+  }
+
+  .section-title {
+    font-size: var(--text-2xl);
+    max-width: 100%;
+  }
+
+  .section-lead {
+    font-size: var(--text-base);
+  }
+
+  /* 4. The stack line is 11px mono and the least useful thing on a card at
+        this width. The contribution bullets carry the same information in
+        language a client can actually read. */
+  .project-stack {
+    display: none;
+  }
+
+  /* 5. Pull the floating CTA clear of the bottom edge and the home indicator. */
+  .floating-cta {
+    right: var(--space-2);
+    bottom: var(--space-2);
+  }
 }

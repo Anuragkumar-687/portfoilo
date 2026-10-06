@@ -56,9 +56,10 @@ export function AboutSection() {
               <p className="text-lg leading-relaxed text-[var(--text-secondary)]">
                 I am a software developer studying B.Tech in Artificial Intelligence at{' '}
                 <span className="text-[var(--text)]">Newton School of Technology</span>,
-                Rishihood University. Most of my work sits on the backend: REST APIs,
-                authentication and access control, caching, and the database design that
-                decides whether any of it holds up.
+                Rishihood University. I work across the whole stack: the interface, the
+                REST APIs, the authentication and access control, and the database design
+                that decides whether any of it holds up. The AI side is my degree, and it
+                is where the recommendation work in QuickKart AI came from.
               </p>
             </Reveal>
 

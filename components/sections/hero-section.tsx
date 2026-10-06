@@ -30,15 +30,15 @@ export function HeroSection() {
             <div>
               <p className="animate-rise pill pill-primary" style={{ animationDelay: '0ms' }}>
                 <span className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />
-                Available for SDE roles
+                Available for freelance projects
               </p>
 
               <h1
                 className="animate-rise mt-s3 text-4xl font-semibold tracking-[-0.035em]"
                 style={{ animationDelay: '60ms' }}
               >
-                I build backend systems that{' '}
-                <span className="text-[var(--primary)]">survive production</span>.
+                I build full-stack products, and the{' '}
+                <span className="text-[var(--primary)]">AI that runs inside</span> them.
               </h1>
 
               <p
@@ -55,10 +55,16 @@ export function HeroSection() {
                 <a href="#work" className="btn btn-primary">
                   See the work <ArrowRight className="h-4 w-4" />
                 </a>
+                <a href="#contact" className="btn btn-secondary">
+                  Start a project
+                </a>
+                {/* Résumé demoted: employers read it, clients do not. Still
+                    one click away, just no longer competing with the two CTAs
+                    that actually convert. */}
                 <a
                   href={siteConfig.links.resume}
                   download="Anurag-Kumar-Resume.pdf"
-                  className="btn btn-secondary"
+                  className="btn btn-ghost"
                 >
                   <Download className="h-4 w-4" /> Résumé
                 </a>
