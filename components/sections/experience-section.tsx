@@ -14,7 +14,7 @@ export function ExperienceSection() {
         <SectionHeading
           eyebrow="Experience"
           title="Shipped inside real engineering teams"
-          lead="Two internships spent on production codebases, writing backend services, reviewing teammates' code and taking features all the way to deployment."
+          lead="Two internships on production codebases: four live apps, 50+ merged pull requests, and the security and reliability bugs nobody else had caught."
         />
 
         <div className="relative">

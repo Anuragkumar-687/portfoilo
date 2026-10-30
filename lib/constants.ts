@@ -76,38 +76,38 @@ export type Experience = {
 };
 
 export const experience: Experience[] = [
-  {
-    id: 'privatevault',
-    role: 'Backend Developer Intern',
-    company: 'PrivateVault AI',
-    location: 'Remote',
-    period: 'May 2026 to July 2026',
-    summary:
-      'Built and maintained backend services behind the product, from feature design through to code review and performance tuning.',
-    highlights: [
-      'Developed and maintained backend services using Python, SQL and FastAPI.',
-      'Worked with the engineering team to design, implement and test new application features.',
-      'Debugged production issues, optimised application performance and reviewed teammates’ code.',
-      'Integrated REST APIs, databases and third-party services under clean-code and documentation standards.',
-    ],
-    stack: ['Python', 'FastAPI', 'SQL', 'REST APIs'],
-  },
+  // Bizowl leads: it ran longer, finished most recently, and is by far the
+  // stronger story of the two.
   {
     id: 'bizowl',
     role: 'Full Stack Developer Intern',
     company: 'Bizowl',
     companyNote: 'WhiteSense Pvt. Ltd.',
-    location: 'Remote, Delhi',
-    period: 'April 2026 to June 2026',
+    location: 'Remote',
+    period: 'May 2026 to October 2026',
     summary:
-      'Owned features end to end across the company’s web products, from the first commit to the deployed release.',
+      'Owned full-stack development across four production apps, shipping 50+ merged pull requests to software used by more than a thousand people.',
     highlights: [
-      'Delivered full-stack features with React, Node.js, Express.js, MongoDB, SQL and Firebase, from development through deployment.',
-      'Designed and integrated RESTful APIs and optimised backend services.',
-      'Implemented Firebase for real-time data sync and authentication.',
-      'Collaborated via Git/GitHub, contributing to code reviews, debugging and release best practice.',
+      'Owned full-stack development across 4 production apps, shipping 50+ merged PRs for 1,000+ users with React and Node.js.',
+      'Migrated 3 product areas from React and Firebase to Next.js, TypeScript and MongoDB, writing the data migration scripts myself.',
+      'Found and fixed a Razorpay secret key leaking to the browser, booking emails that had been broken for 9+ months, and login and session bugs.',
+      'Used AI coding tools daily while reviewing every change myself, and covered booking edge cases with Jest and Supertest.',
     ],
-    stack: ['React', 'Node.js', 'Express.js', 'MongoDB', 'Firebase', 'SQL'],
+    stack: ['React', 'Node.js', 'Next.js', 'TypeScript', 'MongoDB', 'Firebase', 'Razorpay', 'Jest'],
+  },
+  {
+    id: 'privatevault',
+    role: 'Backend Developer Intern',
+    company: 'PrivateVault AI',
+    location: 'Remote',
+    period: 'June 2026 to August 2026',
+    summary:
+      'Built the backend services and REST APIs behind core product features, and kept production healthy.',
+    highlights: [
+      'Built backend services in Python and FastAPI, developing REST APIs on SQL databases for core web application features.',
+      'Debugged production issues, resolved software defects and optimised application performance through hands-on troubleshooting.',
+    ],
+    stack: ['Python', 'FastAPI', 'SQL', 'REST APIs'],
   },
 ];
 
@@ -424,7 +424,7 @@ export type Education = {
 export const education: Education[] = [
   {
     degree: 'Bachelor of Technology',
-    field: 'Artificial Intelligence',
+    field: 'Computer Science and AI',
     institution: 'Newton School of Technology, Rishihood University',
     location: 'Sonipat, India',
     period: '2024 to 2028',
