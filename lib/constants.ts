@@ -9,7 +9,7 @@
  * Change this one line when the custom domain is live.
  */
 export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://anuragkumar-portfolio.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://portfoilo-ten-alpha.vercel.app';
 
 export const siteConfig = {
   name: 'Anurag Kumar',
@@ -203,7 +203,10 @@ export const projects: Project[] = [
     ],
     image: '/images/bizowl-membership.webp',
     tags: ['React', 'Node.js', 'Razorpay', 'MongoDB', 'Payments'],
-    links: [{ label: 'See the membership', href: 'https://www.bizzowl.com/founder-membership' }],
+    links: [
+      { label: 'See it live', href: 'https://www.bizzowl.com/founder-membership' },
+      { label: 'Case study', href: 'https://github.com/Anuragkumar-687/bizowl-membership-case-study' },
+    ],
     featured: true,
   },
   {
@@ -289,7 +292,7 @@ export const openSource: OpenSourceProject[] = [
     contribution:
       'Merged and ongoing pull requests across backend infrastructure and event sourcing.',
     areas: ['Distributed Systems', 'Event Sourcing', 'Backend Infrastructure'],
-    href: 'https://github.com/Apicurio/apicurio-registry',
+    href: 'https://github.com/Apicurio/apicurio-registry/issues?q=author:Anuragkumar-687',
   },
   {
     name: 'OpenEverest',
@@ -298,7 +301,7 @@ export const openSource: OpenSourceProject[] = [
     contribution:
       'Contributions spanning Kubernetes manifests, cloud-native tooling and backend services.',
     areas: ['Kubernetes', 'Cloud Native', 'Helm'],
-    href: 'https://github.com/percona/everest',
+    href: 'https://github.com/openeverest/openeverest/issues?q=author:Anuragkumar-687',
   },
 ];
 
