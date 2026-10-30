@@ -21,7 +21,7 @@ export const siteConfig = {
 
   /** Supporting sentence — what a visitor gets by working with him. */
   subheadline:
-    'Full-stack developer and AI engineer. I build the software businesses run on, front to back, and the AI features inside it. Most recently for a startup serving 10,000 people a day.',
+    'Full-stack developer and AI engineer. I build the software businesses run on, front to back, and the AI features inside it. The paid membership I shipped for a startup earned Rs. 50,000 on its launch day.',
 
   /** Short version used in metadata and cards. */
   summary:
@@ -146,16 +146,16 @@ export const projects: Project[] = [
   {
     title: 'Bizowl Platform',
     group: 'bizowl',
-    subtitle: 'The platform 10,000+ founders use daily',
+    subtitle: 'The platform Bizowl runs on',
     period: '2026',
     context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
     contributions: [
       'Shipped the entire platform, from first commit to production.',
       'Owned the business logic and API layer behind every page, not just the UI.',
-      'Carries 10,000+ users a day on the architecture I built.',
+      'Serves 1,000+ users on the architecture and APIs I built.',
     ],
     metrics: [
-      { value: '10,000+', label: 'Daily users' },
+      { value: '1,000+', label: 'Users served' },
       { value: '3,000+', label: 'Startups helped' },
       { value: '500+', label: 'Providers listed' },
     ],
@@ -194,12 +194,12 @@ export const projects: Project[] = [
     contributions: [
       'Built the revenue engine: the paid membership that converts free users.',
       'Integrated Razorpay end to end, so real money moves through code I wrote.',
-      'Sold out 20+ founding memberships on day one of launch.',
+      'Earned Rs. 50,000 from 10+ founders on the day it launched.',
     ],
     metrics: [
-      { value: '20+', label: 'Paid on launch day' },
-      { value: '2', label: 'Pricing tiers' },
-      { value: '50', label: 'Founding seats' },
+      { value: 'Rs. 50,000', label: 'Earned on launch day' },
+      { value: '10+', label: 'Founders paid day one' },
+      { value: '1,000+', label: 'Users reached' },
     ],
     image: '/images/bizowl-membership.webp',
     tags: ['React', 'Node.js', 'Razorpay', 'MongoDB', 'Payments'],
