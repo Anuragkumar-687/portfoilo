@@ -31,7 +31,7 @@ export function CtaSection() {
         </Reveal>
 
         <Reveal>
-          <h2 className="mx-auto mt-s3 max-w-[18ch] text-4xl font-semibold tracking-[-0.035em]">
+          <h2 className="mx-auto mt-s3 max-w-[20ch] text-3xl font-semibold tracking-[-0.03em]">
             Let’s build something worth{' '}
             <span className="text-[var(--primary)]">paying for</span>.
           </h2>

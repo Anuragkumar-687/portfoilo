@@ -152,7 +152,7 @@ export const projects: Project[] = [
     contributions: [
       'Shipped the entire platform, from first commit to production.',
       'Owned the business logic and API layer behind every page, not just the UI.',
-      'Serves 1,000+ users on the architecture and APIs I built.',
+      'Built the architecture and APIs the whole platform runs on.',
     ],
     metrics: [
       { value: '1,000+', label: 'Users served' },
@@ -199,7 +199,7 @@ export const projects: Project[] = [
     metrics: [
       { value: 'Rs. 50,000', label: 'Earned on launch day' },
       { value: '10+', label: 'Founders paid day one' },
-      { value: '1,000+', label: 'Users reached' },
+      { value: '2', label: 'Pricing tiers' },
     ],
     image: '/images/bizowl-membership.webp',
     tags: ['React', 'Node.js', 'Razorpay', 'MongoDB', 'Payments'],
@@ -212,7 +212,7 @@ export const projects: Project[] = [
   {
     title: 'Client Portal',
     group: 'bizowl',
-    subtitle: 'The logged-in product 1,000+ members rely on',
+    subtitle: 'Where members run their work day to day',
     period: '2026',
     context: 'Client work · Bizowl (WhiteSense Pvt. Ltd.)',
     contributions: [
@@ -356,7 +356,7 @@ export const skillCategories: SkillCategory[] = [
   {
     id: 'ai',
     label: 'AI & ML',
-    note: 'Applied, not academic.',
+    note: 'Shipped in production.',
     skills: [
       'Generative AI',
       'RAG',
@@ -471,7 +471,7 @@ export const services: Service[] = [
   {
     title: 'AI features that earn their place',
     description:
-      'Recommendations, retrieval and assistants wired into the product properly, not bolted on. I built the region-aware engine behind QuickKart AI and study AI at degree level.',
+      'Recommendations, retrieval and assistants wired into the product itself. I built the region-aware engine behind QuickKart AI, and AI is my degree.',
     deliverables: ['RAG & document Q&A', 'Recommendation engines', 'LLM integration', 'LangChain & LangGraph'],
   },
 ];

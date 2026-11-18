@@ -19,7 +19,7 @@ const heroSocials = [
 export function HeroSection() {
   return (
     <>
-      <section id="home" className="relative overflow-hidden pb-s6 pt-s8">
+      <section id="home" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pb-s6 pt-s8">
         <HeroBackdrop />
         <div aria-hidden className="pointer-events-none absolute inset-0 spotlight" />
         <div aria-hidden className="pointer-events-none absolute inset-0 grid-texture" />
@@ -110,7 +110,7 @@ export function HeroSection() {
                 />
               </div>
 
-              <div className="card absolute -bottom-4 -left-4 !rounded-xl px-s3 py-s2 backdrop-blur-md">
+              <div className="card absolute bottom-s2 left-s2 !rounded-xl px-s3 py-s2 backdrop-blur-md">
                 <p className="metric-value !text-xl"><CountUp value="430+" /></p>
                 <p className="metric-label mt-1">DSA problems · 1558 rating</p>
               </div>

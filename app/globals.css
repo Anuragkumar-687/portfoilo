@@ -29,15 +29,15 @@
 
   /* Primary — the single dominant accent. Used for action + emphasis only,
      so it keeps its force. */
-  --primary: #f0374b;
-  --primary-hover: #ff4d60;
-  --primary-soft: rgba(240, 55, 75, 0.12);
-  --primary-line: rgba(240, 55, 75, 0.3);
-  --primary-glow: 0 6px 24px rgba(240, 55, 75, 0.32);
+  --primary: #f54a5c;        /* 4.99:1 as text on --bg (was 4.44, under AA) */
+  --primary-hover: #ff6b78;
+  --primary-soft: rgba(245, 74, 92, 0.12);
+  --primary-line: rgba(245, 74, 92, 0.3);
+  --primary-glow: 0 6px 24px rgba(245, 74, 92, 0.3);
 
   /* Secondary — reserved for the rare second voice. */
-  --secondary: #f0374b;
-  --secondary-soft: rgba(240, 55, 75, 0.1);
+  --secondary: #f54a5c;
+  --secondary-soft: rgba(245, 74, 92, 0.1);
 
   /* Accent — hairlines and separation. */
   --line: rgba(255, 255, 255, 0.07);
@@ -136,7 +136,7 @@
   p { text-wrap: pretty; }
 
   ::selection {
-    background-color: rgba(240, 55, 75, 0.35);
+    background-color: rgba(245, 74, 92, 0.35);
     color: #fff;
   }
 
@@ -316,9 +316,22 @@
 
 .btn:active { transform: translateY(1px); }
 
+/* One height for every button, at every width. The compact `!h-9` variants
+   were 36px while hero buttons were 44px: the same style in two sizes. */
+.btn { min-height: 44px; }
+
+/* The focus ring was landing where it could not be seen on ghost buttons. */
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  position: relative;
+  z-index: 1;
+}
+
 .btn-primary {
   background: var(--primary);
-  color: #fff;
+  /* Dark label, not white: 5.49:1 against the accent, where white gave 3.92. */
+  color: #260209;
   border: 1px solid transparent;
   font-weight: 600;
   box-shadow: var(--primary-glow);
@@ -492,7 +505,7 @@
 
 /* Ambient glow behind the hero. One light source, kept subtle. */
 .spotlight {
-  background: radial-gradient(ellipse 70% 55% at 50% -5%, rgba(240, 55, 75, 0.14), transparent 70%);
+  background: radial-gradient(ellipse 70% 55% at 50% -5%, rgba(245, 74, 92, 0.14), transparent 70%);
 }
 
 .link-underline {
@@ -518,7 +531,7 @@
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--primary);
-  color: #fff;
+  color: #260209;
   font-size: var(--text-sm);
   font-weight: 600;
   transition: top var(--dur) var(--ease);

@@ -27,7 +27,7 @@ export function SkillsSection() {
         <SectionHeading
           eyebrow="Capabilities"
           title="The stack I reach for"
-          lead="Grouped by what I use it for, rather than by how confident a progress bar would claim I am."
+          lead="Grouped by the job each one does."
         />
 
         <div className="grid items-start gap-s3 md:grid-cols-2 lg:grid-cols-3">
