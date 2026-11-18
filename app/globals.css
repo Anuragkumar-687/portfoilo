@@ -267,16 +267,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* A single restrained gradient, used only on the hero's key phrase.
-   Guidebook §4: consistency makes design feel premium — so this appears once. */
-.text-accent-gradient {
-  background: linear-gradient(100deg, var(--primary) 0%, #5eead4 45%, var(--secondary) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
 /* Numeric display — used for every metric so figures read as one family. */
 .metric-value {
   font-size: var(--text-2xl);
