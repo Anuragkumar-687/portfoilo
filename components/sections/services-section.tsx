@@ -1,3 +1,4 @@
+import { Layers, CreditCard, Sparkles } from 'lucide-react';
 import { Reveal } from '@/components/ui/reveal';
 import { SectionHeading } from '@/components/ui/section-heading';
 import { services } from '@/lib/constants';
@@ -7,6 +8,9 @@ import { services } from '@/lib/constants';
  * This section states the offer plainly, so a visitor with a brief knows within
  * seconds whether there is a fit.
  */
+/** One per service, in the order they are declared in constants. */
+const SERVICE_ICONS = [Layers, CreditCard, Sparkles];
+
 export function ServicesSection() {
   return (
     <section id="services" className="section">
@@ -21,8 +25,25 @@ export function ServicesSection() {
           {services.map((service, i) => (
             <Reveal key={service.title}>
               <div className="card card-interactive flex h-full flex-col p-s3 md:p-s4">
-                <span className="mono text-xs text-[var(--primary)]">
-                  {String(i + 1).padStart(2, '0')}
+                {/* An icon per card: this section had no visual of any kind, so
+                    three text blocks sat side by side with nothing separating
+                    them at a glance. */}
+                <span className="flex items-center justify-between">
+                  <span
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border"
+                    style={{
+                      background: 'var(--primary-soft)',
+                      borderColor: 'var(--primary-line)',
+                    }}
+                  >
+                    {(() => {
+                      const Icon = SERVICE_ICONS[i] ?? Layers;
+                      return <Icon className="h-5 w-5 text-[var(--primary)]" />;
+                    })()}
+                  </span>
+                  <span className="mono text-xs text-[var(--text-muted)]">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                 </span>
                 <h3 className="mt-s2 text-lg font-semibold">{service.title}</h3>
                 <p className="mt-s1 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">

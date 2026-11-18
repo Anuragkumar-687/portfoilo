@@ -5,6 +5,7 @@ import {
   siMongodb, siPostgresql, siMysql, siRedis, siSupabase, siFirebase, siPrisma,
   siDocker, siKubernetes, siHelm, siApachekafka, siLinux, siGit, siGithub,
   siLangchain, siHuggingface, siKeras, siScikitlearn, siNumpy, siPandas, siScipy,
+  siJest, siRazorpay,
 } from 'simple-icons';
 
 type Icon = { path: string; hex: string; title: string };
@@ -20,6 +21,7 @@ const ICONS: Record<string, Icon> = {
   MongoDB: siMongodb, PostgreSQL: siPostgresql, MySQL: siMysql, Redis: siRedis,
   Supabase: siSupabase, Firebase: siFirebase, 'Prisma ORM': siPrisma,
   Docker: siDocker, Kubernetes: siKubernetes, Helm: siHelm, Kafka: siApachekafka,
+  Jest: siJest, Razorpay: siRazorpay,
   Linux: siLinux, 'Git & GitHub': siGithub, Git: siGit, GitHub: siGithub,
   LangChain: siLangchain, LangGraph: siLangchain, 'Hugging Face': siHuggingface,
   Keras: siKeras, 'Scikit-learn': siScikitlearn, NumPy: siNumpy,

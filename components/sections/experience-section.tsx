@@ -1,5 +1,6 @@
 import { Reveal } from '@/components/ui/reveal';
 import { SectionHeading } from '@/components/ui/section-heading';
+import { TechIcon } from '@/components/ui/tech-icon';
 import { experience } from '@/lib/constants';
 
 /**
@@ -29,7 +30,7 @@ export function ExperienceSection() {
           />
 
           <ol className="flex flex-col gap-s4">
-            {experience.map((job, i) => (
+            {experience.map((job) => (
               <li key={job.id} className="md:pl-s5">
                 <Reveal>
                   <div className="relative">
@@ -82,9 +83,12 @@ export function ExperienceSection() {
                         ))}
                       </ul>
 
+                      {/* Real brand marks, as in the skills section. This was
+                          the tallest block on the page with nothing to look at. */}
                       <div className="mt-s3 flex flex-wrap gap-1.5">
                         {job.stack.map((tech) => (
-                          <span key={tech} className="pill">
+                          <span key={tech} className="tech-chip">
+                            <TechIcon name={tech} className="h-3.5 w-3.5 shrink-0" />
                             {tech}
                           </span>
                         ))}
